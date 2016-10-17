@@ -4,6 +4,6 @@ Antoon Verroken
 
 Brian Masschaele
 
-Shaunie Vanhove
+Shaunie Van Hove
 
 Matthieu Van Wambeke
