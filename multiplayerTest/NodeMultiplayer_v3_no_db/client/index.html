@@ -29,6 +29,35 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
     var socket = io();
+    var Img={};
+
+    Img.map = {};
+    Img.map['field'] = new Image();
+    Img.map['field'].src = '/client/img/map.png';
+    Img.map['forest'] = new Image()
+    Img.map['forest'].src = '/client/img/map2.png';
+
+    Img.player = new Image();
+    Img.player.src = "/client/img/player.png";
+    Img.bullet = new Image();
+    Img.bullet.src = "/client/img/bullet.png";
+    Img.upgrade1 = new Image();
+    Img.upgrade1.src = '/client/img/upgrade1.png';
+    Img.upgrade2 = new Image();
+    Img.upgrade2.src = '/client/img/upgrade2.png';
+
+    //game
+    var chatText = document.getElementById('chat-text'),
+            chatList = document.getElementById('chat-list'),
+            chatInput = document.getElementById('chat-input'),
+            chatForm = document.getElementById('chat-form'),
+            ctx = document.getElementById("ctx").getContext("2d"),
+            ctxUi = document.getElementById("ctx-ui").getContext("2d"),
+            selfId = null,
+            WIDTH = 500,
+            HEIGHT = 500;
+
+    ctx.font = "30px Arial";
 
     //sign in
     var signDiv = document.getElementById('signDiv'),
@@ -63,33 +92,12 @@
         }
     });
 
-
-    //game
-    var chatText = document.getElementById('chat-text'),
-            chatList = document.getElementById('chat-list'),
-            chatInput = document.getElementById('chat-input'),
-            chatForm = document.getElementById('chat-form'),
-            ctx = document.getElementById("ctx").getContext("2d"),
-            ctxUi = document.getElementById("ctx-ui").getContext("2d"),
-            selfId = null,
-            WIDTH = 500,
-            HEIGHT = 500;
-
-    var Img = {};
-    Img.player = new Image();
-    Img.player.src = '/client/img/player.png';
-    Img.bullet = new Image();
-    Img.bullet.src = '/client/img/bullet.png';
-
-    Img.map = {};
-    Img.map['field'] = new Image();
-    Img.map['field'].src = '/client/img/map.png';
-    Img.map['forest'] = new Image();
-    Img.map['forest'].src = '/client/img/map2.png';
-
-
-    ctx.font = "30px Arial";
-
+    testCollisionRectRect = function(rect1,rect2){
+        return rect1.x <= rect2.x+rect2.width
+                && rect2.x <= rect1.x+rect1.width
+                && rect1.y <= rect2.y + rect2.height
+                && rect2.y <= rect1.y + rect1.height;
+    }
 
     var Player = function (initPack) {
         var self = {};
@@ -115,8 +123,6 @@
             var width = Img.player.width * 2;
             var height = Img.player.height * 2;
 
-
-
             ctx.drawImage(Img.player, 0, 0, Img.player.width, Img.player.height, x - width / 2, y - height / 2,
                     width, height);
 
@@ -128,6 +134,51 @@
     };
     Player.list = {};
 
+    self.testCollision = function(entity2){	//return if colliding (true/false)
+        var rect1 = {
+            x:self.x-self.width/2,
+            y:self.y-self.height/2,
+            width:self.width,
+            height:self.height
+        };
+        var rect2 = {
+            x:entity2.x-entity2.width/2,
+            y:entity2.y-entity2.height/2,
+            width:entity2.width,
+            height:entity2.height
+        };
+        return testCollisionRectRect(rect1,rect2);
+    };
+
+    var Upgrade = function (initPack) {
+        var self = {};
+        console.log(initPack);
+        self.id = initPack.id;
+        self.x = initPack.x;
+        self.y = initPack.y;
+        self.map = initPack.map;
+        self.category = initPack.category;
+
+        self.draw = function () {
+            if(Player.list[selfId].map !== self.map) return;
+            var width = Img.upgrade1.width / 2;
+            var height = Img.upgrade1.height / 2;
+
+            var x = self.x - Player.list[selfId].x + WIDTH / 2;
+            var y = self.y - Player.list[selfId].y + HEIGHT / 2;
+            console.log(self.category);
+            if(self.category==="health")
+            ctx.drawImage(Img.upgrade1, 0, 0, Img.upgrade1.width, Img.upgrade1.height, x - width / 2, y - height / 2,
+                    width, height);
+            else if(self.category==="atkSpd")
+                ctx.drawImage(Img.upgrade2, 0, 0, Img.upgrade2.width, Img.upgrade2.height, x - width / 2, y - height / 2,
+                        width, height);
+        };
+
+        Upgrade.list[self.id] = self;
+        return self;
+    };
+    Upgrade.list = {};
 
     var Bullet = function (initPack) {
         var self = {};
@@ -165,6 +216,9 @@
         }
         for (var i = 0; i < data.bullet.length; i++) {
             new Bullet(data.bullet[i]);
+        }
+        for (var i = 0; i < data.upgrade.length; i++) {
+            new Upgrade(data.upgrade[i]);
         }
     });
 
@@ -211,7 +265,9 @@
         for (var i = 0; i < data.bullet.length; i++) {
             delete Bullet.list[data.bullet[i]];
         }
-    });
+        for (var i = 0; i < data.upgrade.length; i++) {
+            delete Upgrade.list[data.upgrade[i]];
+        }    });
 
 
     setInterval(function () {
@@ -224,6 +280,9 @@
         }
         for (var i in Bullet.list) {
             Bullet.list[i].draw();
+        }
+        for (var i in Upgrade.list) {
+            Upgrade.list[i].draw();
         }
     }, 40);
 
