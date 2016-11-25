@@ -20,7 +20,7 @@ serv.listen(process.env.port || 2000);
 console.log('server started');
 
 var SOCKET_LIST = {};
-
+var enemyList = {};
 var Entity = function (param) {
     var self = {
         x: 250,
@@ -191,6 +191,58 @@ Player.update = function () {
     return pack;
 };
 
+var Enemy = function(id,x,y,width,height){
+    var self = Actor('enemy',id,x,y,width,height,Img.enemy,10,1);
+    enemyList[id] = self;
+
+    var super_update = self.update;
+    self.update = function(){
+        super_update();
+        self.updateAim();
+    }
+
+    self.updateAim = function(){
+        var diffX = player.x - self.x;
+        var diffY = player.y - self.y;
+
+        self.aimAngle = Math.atan2(diffY,diffX) / Math.PI * 180
+    }
+
+
+    self.updatePosition = function(){
+        var diffX = player.x - self.x;
+        var diffY = player.y - self.y;
+
+        if(diffX > 0)
+            self.x += 3;
+        else
+            self.x -= 3;
+
+        if(diffY > 0)
+            self.y += 3;
+        else
+            self.y -= 3;
+
+    }
+}
+var randomlyGenerateEnemy = function(){
+    //Math.random() returns a number between 0 and 1
+    var x = Math.random()*currentMap.width;
+    var y = Math.random()*currentMap.height;
+    var height = 64;	//between 10 and 40
+    var width = 64;
+    var id = Math.random();
+    Enemy(id,x,y,width,height);
+
+}
+// Enemy.update = function(){
+//     var pack = [];
+//     for (var i in Enemy.list){
+//         var enemy = Enemy.list[i];
+//         enemy.update();
+//         enemy.push(enemy.getUodatePack());
+//     }
+// }
 var Bullet = function (param) {
     var self = Entity(param);
     self.id = Math.random();
@@ -346,6 +398,7 @@ setInterval(function () {
     var pack = {
         player: Player.update(),
         bullet: Bullet.update()
+
     };
 
     for (var i in SOCKET_LIST) {

@@ -25,11 +25,11 @@
         <input type="text" id="chat-input" style="width: 500px">
     </form>
 </div>
-
+<script src="../app.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script>
     var socket = io();
-
+    var frameCount = 0;
     //sign in
     var signDiv = document.getElementById('signDiv'),
             signDivUsername = document.getElementById('signDiv-username'),
@@ -80,6 +80,8 @@
     Img.player.src = '/client/img/player.png';
     Img.bullet = new Image();
     Img.bullet.src = '/client/img/bullet.png';
+    Img.enemy = new Image();
+    Img.enemy.src = '/client/img/enemy.png';
 
     Img.map = {};
     Img.map['field'] = new Image();
@@ -157,6 +159,8 @@
 
     //init
     socket.on('init', function (data) {
+        frameCount = 0;
+        enemyList = {};
         if (data.selfId) {
             selfId = data.selfId;
         }
@@ -166,6 +170,9 @@
         for (var i = 0; i < data.bullet.length; i++) {
             new Bullet(data.bullet[i]);
         }
+        randomlyGenerateEnemy();
+        randomlyGenerateEnemy();
+        randomlyGenerateEnemy();
     });
 
     //update
@@ -173,6 +180,8 @@
         for (var i = 0; i < data.player.length; i++) {
             var pack = data.player[i];
             var p = Player.list[pack.id];
+            if(frameCount % 100 === 0)	//every 4 sec
+                randomlyGenerateEnemy();
             if (p) {
                 if (pack.x !== undefined) {
                     p.x = pack.x;
@@ -188,7 +197,23 @@
                 }
             }
         }
-
+        if(b.combatType === 'player'){	//bullet was shot by player
+            for(var key2 in enemyList){
+                if(b.testCollision(enemyList[key2])){
+                    toRemove = true;
+                    delete enemyList[key2];
+                }
+            }
+        } else if(b.combatType === 'enemy'){
+            if(b.testCollision(player)){
+                toRemove = true;
+                player.hp -= 1;
+            }
+        }
+        for(var key in enemyList){
+            enemyList[key].update();
+            enemyList[key].performAttack();
+        }
         for (var i = 0; i < data.bullet.length; i++) {
             var pack = data.bullet[i];
             var b = Bullet.list[pack.id];
@@ -219,6 +244,8 @@
         ctx.clearRect(0, 0, 500, 500);
         drawMap();
         drawScore();
+        if(frameCount % 100 === 0)	//every 4 sec
+            randomlyGenerateEnemy();
         for (var i in Player.list) {
             Player.list[i].draw();
         }
