@@ -4,24 +4,21 @@ var db = null; //('localhost:27017/myGame', ['account', 'progress']);
 var express = require('express');
 var app = express();
 var serv = require('http').Server(app);
-
 var profiler = require('v8-profiler');
 var fs = require('fs');
-
 var io = require('socket.io')(serv, {});
 
 var frameCount = 0;
+var SOCKET_LIST = {};
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/client/index.html');
 });
-
 app.use('/client', express.static(__dirname + '/client'));
 
 serv.listen(process.env.PORT || 2000);
-console.log('server started');
 
-var SOCKET_LIST = {};
+console.log('server started');
 
 var Entity = function (param) {
     var self = {
@@ -53,6 +50,8 @@ var Entity = function (param) {
     };
     return self;
 };
+
+//#region "Player"
 
 var Player = function (param) {
     var self = Entity(param);
@@ -87,7 +86,7 @@ var Player = function (param) {
             self.atkSpdCounter = 0;
             self.generate(angle);
         }
-    }
+    };
 
     self.generate = function (angle) {
         Bullet({
@@ -147,6 +146,7 @@ var Player = function (param) {
 };
 
 Player.list = {};
+
 Player.onConnect = function (socket) {
     var map = 'forest';
     if (Math.random() > 0.5) map = 'field';
@@ -183,8 +183,6 @@ Player.onConnect = function (socket) {
     });
 };
 
-
-
 Player.getAllPlayersPack = function () {
     var players = [];
     for (var i in Player.list) {
@@ -208,6 +206,64 @@ Player.update = function () {
     return pack;
 };
 
+//#endregion "Player"
+
+Actor = function(type,id,x,y,width,height,img,hp,atkSpd){
+    var self = Entity(type,id,x,y,width,height,img);
+
+    self.hp = hp;
+    self.atkSpd = atkSpd;
+    self.attackCounter = 0;
+    self.aimAngle = 0;
+
+    var super_update = self.update;
+    self.update = function(){
+        super_update();
+        self.attackCounter += self.atkSpd;
+    }
+
+    self.performAttack = function(){
+        if(self.attackCounter > 25){	//every 1 sec
+            self.attackCounter = 0;
+            generateBullet(self);
+        }
+    }
+
+    self.performSpecialAttack = function(){
+        if(self.attackCounter > 50){	//every 1 sec
+            self.attackCounter = 0;
+            /*
+             for(var i = 0 ; i < 360; i++){
+             generateBullet(self,i);
+             }
+             */
+            generateBullet(self,self.aimAngle - 5);
+            generateBullet(self,self.aimAngle);
+            generateBullet(self,self.aimAngle + 5);
+        }
+    }
+
+
+    return self;
+};
+
+//#region "Enemies"
+
+
+randomlyGenerateEnemy = function(){
+    //Math.random() returns a number between 0 and 1
+    var x = Math.random()*currentMap.width;
+    var y = Math.random()*currentMap.height;
+    var height = 64;	//between 10 and 40
+    var width = 64;
+    var id = Math.random();
+    Enemy(id,x,y,width,height);
+};
+
+//#endregion "Enemies"
+
+//#region "Bullet"
+
 var Bullet = function (param) {
     var self = Entity(param);
     self.id = Math.random();
@@ -217,30 +273,30 @@ var Bullet = function (param) {
     self.timer = 0;
     self.toRemove = false;
     var super_update = self.update;
-        self.update = function () {
-            if (self.timer++ > 100) {
+    self.update = function () {
+        if (self.timer++ > 100) {
+            self.toRemove = true;
+        }
+        super_update();
+
+        for (var i in Player.list) {
+            var p = Player.list[i];
+            if (self.map === p.map && self.getDistance(p) < 32 && self.parent !== p.id) {
+                p.hp -= 1;
+                var shooter = Player.list[self.parent];
+
+                if (p.hp <= 0) {
+                    if (shooter) {
+                        shooter.score += 1;
+                    }
+                    p.hp = p.hpMax;
+                    p.x = Math.random() * 500;
+                    p.y = Math.random() * 500;
+                }
                 self.toRemove = true;
             }
-            super_update();
-
-            for (var i in Player.list) {
-                var p = Player.list[i];
-                if (self.map === p.map && self.getDistance(p) < 32 && self.parent !== p.id) {
-                    p.hp -= 1;
-                    var shooter = Player.list[self.parent];
-
-                    if (p.hp <= 0) {
-                        if (shooter) {
-                            shooter.score += 1;
-                        }
-                        p.hp = p.hpMax;
-                        p.x = Math.random() * 500;
-                        p.y = Math.random() * 500;
-                    }
-                    self.toRemove = true;
-                }
-            }
-        };
+        }
+    };
     self.getInitPack = function () {
         return {
             id: self.id,
@@ -287,6 +343,10 @@ Bullet.getAllBulletsPack = function () {
     }
     return bullets;
 };
+
+//#endregion "Bullet"
+
+//#region "Upgrade"
 
 var Upgrade = function (param) {
     var self = Entity(param);
@@ -365,6 +425,8 @@ Upgrade.randomlyGeneratedUpgrade = function(){
     var id = Math.random();
     var category;
 
+    //randomlyGenerateEnemy();
+
     if(Math.random()<0.5){
         category = 'health';
     } else {
@@ -372,6 +434,10 @@ Upgrade.randomlyGeneratedUpgrade = function(){
     }
     Upgrade({id:id,x:x,y:y,category:category});
 };
+
+//#endregion "Upgrade"
+
+//#region "Account & validatie"
 
 var isValidPassword = function (data, cb) {
     // db.account.find({username: data.username, password: data.password}, function (err, res) {
@@ -395,6 +461,8 @@ var addUser = function (data, cb) {
     // });
     cb();
 };
+
+//#endregion "Account & validatie"
 
 io.sockets.on('connection', function (socket) {
     console.log("socket connection");
@@ -442,15 +510,25 @@ io.sockets.on('connection', function (socket) {
     })
 });
 
-
 var initPack = {player: [], bullet: [], upgrade: []};
 var removePack = {player: [], bullet: [], upgrade: []};
+var enemyPack = {enemy: []};
 
+randomlyGenerateEnemy = function(){
+    //Math.random() returns a number between 0 and 1
+    var x = Math.random()*640;
+    var y = Math.random()*480;
+    var height = 64;	//between 10 and 40
+    var width = 64;
+    var id = Math.random();
+    Enemy(id,x,y,width,height);
+};
 setInterval(function () {
     frameCount++;
     if(frameCount > 100) {
         frameCount = 0;
         Upgrade.randomlyGeneratedUpgrade();
+        randomlyGenerateEnemy();
     }
 
     var pack = {
@@ -472,7 +550,6 @@ setInterval(function () {
     removePack.bullet = [];
     removePack.upgrade = [];
 }, 1000 / 25);
-
 
 // var startProfiling = function (duration) {
 //     profiler.startProfiling('1', true);
