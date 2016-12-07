@@ -249,16 +249,54 @@ Actor = function(type,id,x,y,width,height,img,hp,atkSpd){
 
 //#region "Enemies"
 
+var Enemy = function(id,xPos,yPos,speed,health){
+    var self = Actor('enemy',id,xPos,yPos,speed,health,Img.enemy,10,1);
+    enemyList[id] = self;
 
-randomlyGenerateEnemy = function(){
-    //Math.random() returns a number between 0 and 1
-    var x = Math.random()*currentMap.width;
-    var y = Math.random()*currentMap.height;
-    var height = 64;	//between 10 and 40
-    var width = 64;
-    var id = Math.random();
-    Enemy(id,x,y,width,height);
+    var super_update = self.update;
+    self.update = function(){
+        super_update();
+        self.updateAim();
+    };
+
+    ctx.drawImage(Img.enemy, 0, 0, Img.enemy.width, Img.enemy.height, x - width / 2, y - height / 2,
+        width, height);
+
+
+    self.updateAim = function(){
+        var diffX = player.x - self.x;
+        var diffY = player.y - self.y;
+
+        self.aimAngle = Math.atan2(diffY,diffX) / Math.PI * 180;
+    };
+
+    self.updatePosition = function(){
+        var diffX = player.x - self.x;
+        var diffY = player.y - self.y;
+
+        if(diffX > 0)
+            self.x += 3;
+        else
+            self.x -= 3;
+
+        if(diffY > 0)
+            self.y += 3;
+        else
+            self.y -= 3;
+    };
+
+    self.randomlyGenerateEnemy = function(){
+        //Math.random() returns a number between 0 and 1
+        var xPos = Math.random()*currentMap.width;
+        var yPos = Math.random()*currentMap.height;
+        var speed = 64;	//between 10 and 40
+        var health = 64;
+        var id = Math.random();
+        Enemy(id,xPos,yPos,speed,health);
+    };
+
 };
+
 
 //#endregion "Enemies"
 
@@ -273,6 +311,7 @@ var Bullet = function (param) {
     self.timer = 0;
     self.toRemove = false;
     var super_update = self.update;
+
     self.update = function () {
         if (self.timer++ > 100) {
             self.toRemove = true;
@@ -305,7 +344,6 @@ var Bullet = function (param) {
             map: self.map
         }
     };
-
     self.getUpdatePack = function () {
         return {
             id: self.id,
@@ -512,23 +550,14 @@ io.sockets.on('connection', function (socket) {
 
 var initPack = {player: [], bullet: [], upgrade: []};
 var removePack = {player: [], bullet: [], upgrade: []};
-var enemyPack = {enemy: []};
+var enemyPack = {id: Enemy.id, xPos: Enemy.xPos,yPos: Enemy.yPos, speed: Enemy.speed, health: Enemy.health };
 
-randomlyGenerateEnemy = function(){
-    //Math.random() returns a number between 0 and 1
-    var x = Math.random()*640;
-    var y = Math.random()*480;
-    var height = 64;	//between 10 and 40
-    var width = 64;
-    var id = Math.random();
-    Enemy(id,x,y,width,height);
-};
 setInterval(function () {
     frameCount++;
     if(frameCount > 100) {
         frameCount = 0;
         Upgrade.randomlyGeneratedUpgrade();
-        randomlyGenerateEnemy();
+        Enemy.randomlyGenerateEnemy();
     }
 
     var pack = {
@@ -542,6 +571,7 @@ setInterval(function () {
         socket.emit('init', initPack);
         socket.emit('update', pack);
         socket.emit('remove', removePack);
+        socket.emit('enemy', enemyPack);
     }
     initPack.player = [];
     initPack.bullet = [];

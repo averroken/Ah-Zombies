@@ -222,42 +222,6 @@
 
     //#region "Enemy"
 
-    var Enemy = function(id,x,y,width,height){
-        var self = Actor('enemy',id,x,y,width,height,Img.enemy,10,1);
-        enemyList[id] = self;
-
-        var super_update = self.update;
-        self.update = function(){
-            super_update();
-            self.updateAim();
-        };
-
-        ctx.drawImage(Img.enemy, 0, 0, Img.enemy.width, Img.enemy.height, x - width / 2, y - height / 2,
-            width, height);
-
-
-        self.updateAim = function(){
-            var diffX = player.x - self.x;
-            var diffY = player.y - self.y;
-
-            self.aimAngle = Math.atan2(diffY,diffX) / Math.PI * 180;
-        };
-
-        self.updatePosition = function(){
-            var diffX = player.x - self.x;
-            var diffY = player.y - self.y;
-
-            if(diffX > 0)
-                self.x += 3;
-            else
-                self.x -= 3;
-
-            if(diffY > 0)
-                self.y += 3;
-            else
-                self.y -= 3;
-        }
-    };
 
     //#endregion "Enemy"
 
@@ -338,8 +302,6 @@
     Bullet.list = {};
     //#endregion "Bullet"
 
-
-
     //init
     socket.on('init', function (data) {
         if (data.selfId) {
@@ -354,9 +316,6 @@
         for (var i = 0; i < data.upgrade.length; i++) {
             new Upgrade(data.upgrade[i]);
         }
-        //randomlyGenerateEnemy();
-        //randomlyGenerateEnemy();
-        //randomlyGenerateEnemy();
         console.log("test");
     });
 
@@ -407,11 +366,15 @@
             delete Upgrade.list[data.upgrade[i]];
         }    });
 
+    //enemy socket
+    socket.on('enemy', function (data) {
+        randomlyGenerateEnemy();
+    });
+
     setInterval(function () {
         if (!selfId) return;
         ctx.clearRect(0, 0, 500, 500);
         drawMap();
-        //randomlyGenerateEnemy();
         drawScore();
         for (var i in Player.list) {
             Player.list[i].draw();
