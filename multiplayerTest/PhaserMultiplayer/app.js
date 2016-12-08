@@ -4,16 +4,19 @@ var express = require('express');
 var app = express();
 var serv = require('http').Server(app);
 var fs = require('fs');
-var io = require('socket.io')(serv, {});
+var io = require('socket.io')(serv, {httpCompression: true});
+var compression = require('compression');
 var port = process.env.PORT || 2000;
 
+app.use(compression());
+app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res) {
-    res.sendFile(__dirname + '/part1.html');
+    res.sendFile(__dirname + '/public/part1.html');
 });
 
-app.use('/js', express.static(__dirname + '/js'));
-app.use('/assets', express.static(__dirname + '/assets'));
+app.use('/js', express.static(__dirname + '/public/js'));
+app.use('/assets', express.static(__dirname + '/public/assets'));
 
 serv.listen(port);
 console.log('server started on:' + port);
@@ -40,19 +43,19 @@ io.sockets.on('connection', function(socket) {
         console.log("disconnect | id disconnected: " + socket.id);
     });
 
-    socket.on('moveMyPlayer', function (data) {
-      // console.log("moving player");
-      // socket.broadcast.emit('movePlayerOnBuddy', data);
+    socket.on('moveMyPlayer', function(data) {
+        // console.log("moving player");
+        // socket.broadcast.emit('movePlayerOnBuddy', data);
 
-      if(SOCKET_LIST[data.id] === undefined) return;
-      if (SOCKET_LIST[data.id].x === undefined || SOCKET_LIST[data.id].y === undefined) {
-        SOCKET_LIST[data.id].x = data.x;
-        SOCKET_LIST[data.id].y = data.y;
-      }
-      if (SOCKET_LIST[data.id].x !== data.x || SOCKET_LIST[data.id].y !== data.y) {
-        console.log("moving player");
-        socket.broadcast.emit('movePlayerOnBuddy', data);
-      }
+        if (SOCKET_LIST[data.id] === undefined) return;
+        if (SOCKET_LIST[data.id].x === undefined || SOCKET_LIST[data.id].y === undefined) {
+            SOCKET_LIST[data.id].x = data.x;
+            SOCKET_LIST[data.id].y = data.y;
+        }
+        if (SOCKET_LIST[data.id].x !== data.x ||  SOCKET_LIST[data.id].y !== data.y) {
+            console.log("moving player");
+            socket.broadcast.emit('movePlayerOnBuddy', data);
+        }
     });
 });
 
@@ -81,19 +84,19 @@ function countSockets() {
 }
 
 function sendAllBuddies(socket) {
-  var x = Math.random() * 1000;
-  var y = Math.random() * 100;
-  var count = 0;
-  for(var s in SOCKET_LIST){
-    console.log("buddy id: " + s);
-    console.log("x: " + x + "  ||  y: " + y);
-    socket.broadcast.emit("newBuddy", {
-        id: s,
-        x: x + count,
-        y: y + count
-    });
-    count += 100;
-  }
+    var x = Math.random() * 1000;
+    var y = Math.random() * 100;
+    var count = 0;
+    for (var s in SOCKET_LIST) {
+        console.log("buddy id: " + s);
+        console.log("x: " + x + "  ||  y: " + y);
+        socket.broadcast.emit("newBuddy", {
+            id: s,
+            x: x + count,
+            y: y + count
+        });
+        count += 100;
+    }
 }
 
 setInterval(function() {
