@@ -271,6 +271,31 @@ randomlyGenerateEnemy = function(){
     Enemy(id,xPos, yPos, speed, health);
 };
 
+/* Test Enemy AI */
+GetClosestPlayer = function (enemy) {
+    for(var player in Player.list){
+        for(var enemy in enemyList){
+            var playerXPos = Player.list[player].x;
+            var playerYPos = Player.list[player].y;
+            //console.log(player + ": X= " + playerXPos + ", Y= " + playerYPos);
+
+            var diffX = playerXPos - enemyList[enemy].xPos;
+            var diffY = playerYPos - enemyList[enemy].yPos;
+
+            if(diffX > 0)
+                enemyList[enemy].xPos += 1;
+            else
+                enemyList[enemy].xPos -= 1;
+
+            if(diffY > 0)
+                enemyList[enemy].yPos += 1;
+            else
+                enemyList[enemy].yPos -= 1;
+        }
+    }
+};
+/* End Test */
+
 
 //#endregion "Enemies"
 
@@ -524,15 +549,23 @@ io.sockets.on('connection', function (socket) {
 
 var initPack = {player: [], bullet: [], upgrade: []};
 var removePack = {player: [], bullet: [], upgrade: []};
-//var enemyPack = {id: Enemy.id, xPos: Enemy.xPos,yPos: Enemy.yPos, speed: Enemy.speed, health: Enemy.health };
 
 setInterval(function () {
+    //console.log("1");
     frameCount++;
     if(frameCount > 100) {
         frameCount = 0;
         Upgrade.randomlyGeneratedUpgrade();
-        //Enemy.randomlyGenerateEnemy();
-        randomlyGenerateEnemy();
+        //if(Object.keys(enemyList).length < 11){
+            randomlyGenerateEnemy();
+        //}
+        console.log(Object.keys(enemyList).length);
+    }
+
+    if(Object.keys(enemyList).length !== 0){
+        for(var enemy in enemyList){
+            GetClosestPlayer(enemy);
+        }
     }
 
     var pack = {
@@ -546,7 +579,6 @@ setInterval(function () {
         socket.emit('init', initPack);
         socket.emit('update', pack);
         socket.emit('remove', removePack);
-        //socket.emit('enemy', enemyPack);
         socket.emit('enemy', enemyList);
     }
     initPack.player = [];
