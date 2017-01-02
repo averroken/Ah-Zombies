@@ -16,6 +16,8 @@ app.get("/", function(req, res, next) {
 
 app.use('/js', express.static(__dirname + '/js'));
 app.use('/assets', express.static(__dirname + '/assets'));
+app.use('/dist', express.static(__dirname + '/dist'));
+
 
 serv.listen(port);
 console.log('server started on:' + port);
