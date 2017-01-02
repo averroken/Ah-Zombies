@@ -25,12 +25,44 @@
             padding: 0px;
             margin: 0px;
         }
+
+
+    </style>
+    <style>
+        html, body {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 0;
+            margin: 0;
+        }
+
+        #left {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+        }
     </style>
 </head>
 
 <body>
     <script type="text/javascript" src="js/main.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <div id="left"></div>
+    <script src="../dist/nipplejs.js" charset="utf-8"></script>
+    <script>
+        var joystickL = nipplejs.create({
+            zone: document.getElementById('left'),
+            mode: 'static',
+            position: { left: '20%', top: '50%' },
+            color: 'green',
+            size: 100
+        });
+    </script>
     <script type="text/javascript">
         var socket = io();
         var idSet = false;
