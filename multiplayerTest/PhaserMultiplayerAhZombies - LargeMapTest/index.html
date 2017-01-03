@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Phaser 2D tutorial</title>
-
     <script type="text/javascript" src="js/phaser.js"></script>
     <script type="text/javascript" src="js/Boot.js"></script>
     <script type="text/javascript" src="js/Preload.js"></script>
@@ -19,46 +18,34 @@
     <script type="text/javascript" src="js/room_6.js"></script>
     <script type="text/javascript" src="js/room_7.js"></script>
     <script type="text/javascript" src="js/room_8.js"></script>
-
-    <style media="screen">
-        body {
-            padding: 0px;
-            margin: 0px;
-        }
-
-
-    </style>
-    <style>
-        html, body {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            padding: 0;
-            margin: 0;
-        }
-
-        #left {
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 100%;
-        }
-    </style>
+    <link rel="stylesheet" src="css/style.css" />
 </head>
 
 <body>
+<script>
+    var windowx = document.window.width;
+    var windowy = document.window.height;
+</script>
     <script type="text/javascript" src="js/main.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <div id="left"></div>
+    <div id="game">
+        <div id="left"></div>
+        <div id="right"></div>
+    </div>
     <script src="dist/nipplejs.js" charset="utf-8"></script>
     <script>
         var joystickL = nipplejs.create({
             zone: document.getElementById('left'),
             mode: 'static',
-            position: { left: '5%', top: '78%' },
+            position: { left: '10%', top: '78%' },
+            color: 'white',
+            size: 65
+        });
+
+        var joystickR = nipplejs.create({
+            zone: document.getElementById('right'),
+            mode: 'static',
+            position: { right: '10%', bottom: '22%' },
             color: 'white',
             size: 65
         });
@@ -69,9 +56,58 @@
         var buddies = {};
         var myId;
         var game = TopDownGame.game;
+        var cursor; //= game.input.keyboard.createCursorKeys().left;
 
         socket.on('yourId', function(data) {
             setId(data.id);
+        });
+
+        function beweegPeetje(direction) {
+            switch(direction){
+                case "left":
+                    cursor.left.isDown = true
+                    return;
+
+                case "right":
+                    cursor.right.isDown = true
+                    return;
+
+                case "up":
+                    cursor.up.isDown = true
+                    return;
+
+                case "down":
+                    cursor.down.isDown = true
+                    return;
+
+                default: return;
+            }
+        }
+
+        joystickL.on('move dir start', function (evt, data) {
+            if(!cursor) cursor = game.input.keyboard.createCursorKeys();
+            //console.log(data);
+            if (data.direction){
+                var direction = data.direction.angle;
+                //console.log(direction);
+                beweegPeetje(direction);
+            }
+        });
+
+        joystickL.on('end', function (evt, data) {
+            //console.log(data);
+            cursor.down.isDown = false;
+            cursor.up.isDown = false;
+            cursor.right.isDown = false;
+            cursor.left.isDown = false;
+        });
+
+            joystickR.on('move dir start end', function (evt, data) {
+            if (data.angle){
+                //var data = "<p>x direction: " +data.direction.x+ "</br>y direction: " +data.direction.y+ "</br>angle: "+data.direction.angle+ "</p>";
+                var angle_degree = data.angle.degree;
+                console.log(angle_degree);
+            }
         });
 
         function setId(id) {

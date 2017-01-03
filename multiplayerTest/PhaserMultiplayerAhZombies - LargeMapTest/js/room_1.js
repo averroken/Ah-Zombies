@@ -1,5 +1,6 @@
 var TopDownGame = TopDownGame ||  {};
 
+
 TopDownGame.room_1 = function() {};
 
 TopDownGame.room_1.prototype = {

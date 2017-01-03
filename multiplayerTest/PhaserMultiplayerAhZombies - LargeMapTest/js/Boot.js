@@ -9,12 +9,10 @@ TopDownGame.Boot.prototype = {
     create: function() {
         this.game.state.backgroundColor = '#fff';
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-
         this.scale.pageAlignVertically = true;
         this.scale.pageAlignHorizontally = true;
 
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
-
         this.state.start('Preload');
     }
 }
