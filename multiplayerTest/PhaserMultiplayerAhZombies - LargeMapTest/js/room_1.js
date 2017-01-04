@@ -26,6 +26,13 @@ TopDownGame.room_1.prototype = {
 
         this.game.camera.follow(this.player);
 
+        this.boosts = TopDownGame.game.add.text(TopDownGame.game.camera.x,TopDownGame.game.camera.y,this.player.x, { font: '12px Arial', fill: '#fff' });
+        this.boosts.fixedToCamera = true;this.boosts.cameraOffset.setTo(0,0);
+
+        this.health = TopDownGame.game.add.text(TopDownGame.game.camera.y,TopDownGame.game.camera.x,this.player.y, { font: '12px Arial', fill: '#fff' });
+        this.health.fixedToCamera = true;this.health.cameraOffset.setTo(0,30);
+
+
         this.cursors = this.game.input.keyboard.createCursorKeys();
     },
     createItems: function() {
@@ -98,5 +105,7 @@ TopDownGame.room_1.prototype = {
         this.game.physics.arcade.overlap(this.player, this.items, this.collect, null, this);
 
         this.game.physics.arcade.overlap(this.player, this.doors, this.enterDoor, null, this);
+        this.boosts.setText(Math.round(this.player.x));
+        this.health.setText(Math.round(this.player.y));
     }
 };

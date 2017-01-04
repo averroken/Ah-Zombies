@@ -19,8 +19,34 @@
     <script type="text/javascript" src="js/room_7.js"></script>
     <script type="text/javascript" src="js/room_8.js"></script>
     <link rel="stylesheet" src="css/style.css" />
-</head>
+    <style>
+        #health{
+             position: absolute;
+             left: 5%;
+             top: 10%;
+             color: white;
+         }
 
+        #ammo{
+            position: absolute;
+            left: 5%;
+            top: 15%;
+            color: white;
+        }
+        #lvl{
+            position: absolute;
+            right: 15%;
+            top: 10%;
+            color: white;
+        }
+        #exp{
+            position: absolute;
+            right: 15%;
+            top: 15%;
+            color: white;
+        }
+    </style>
+</head>
 <body>
 <script>
     var windowx = document.window.width;
@@ -29,6 +55,10 @@
     <script type="text/javascript" src="js/main.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <div id="game">
+        <!--<div id="health">Health: </div>
+        <div id="ammo">Ammo: </div>
+        <div id="lvl">Level: </div>
+        <div id="exp">Exp: </div>-->
         <div id="left"></div>
         <div id="right"></div>
     </div>
@@ -63,22 +93,27 @@
         });
 
         function beweegPeetje(direction) {
+            cursor.down.isDown = false;
+            cursor.up.isDown = false;
+            cursor.right.isDown = false;
+            cursor.left.isDown = false;
+
             switch(direction){
                 case "left":
-                    cursor.left.isDown = true
-                    return;
+                    cursor.left.isDown = true;
+                    break;
 
                 case "right":
-                    cursor.right.isDown = true
-                    return;
+                    cursor.right.isDown = true;
+                    break;
 
                 case "up":
-                    cursor.up.isDown = true
-                    return;
+                    cursor.up.isDown = true;
+                    break;
 
                 case "down":
-                    cursor.down.isDown = true
-                    return;
+                    cursor.down.isDown = true;
+                    break;
 
                 default: return;
             }
@@ -89,7 +124,9 @@
             //console.log(data);
             if (data.direction){
                 var direction = data.direction.angle;
-                //console.log(direction);
+                var health = document.getElementById("health");
+                var xPos = game.state.states.room_1.player.x;
+                //health.innerHTML = "Health: " + Math.round(xPos);
                 beweegPeetje(direction);
             }
         });
