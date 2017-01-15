@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="11" height="18" tilewidth="32" tileheight="32" nextobjectid="28">
+ <tileset firstgid="1" name="Tiled-test" tilewidth="32" tileheight="32" tilecount="3" columns="3">
+  <image source="D:/Dropbox/Dropbox/Howest/Semester_5/GameArt/Tiled-test.png" width="96" height="32"/>
+ </tileset>
+ <tileset firstgid="4" name="cute_lpc" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="D:/Dropbox/Dropbox/Howest/Semester_5/GameArt/cute_lpc.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="260" name="cute_lpc_doors_x" tilewidth="96" tileheight="77" tilecount="2" columns="2">
+  <image source="D:/Dropbox/Dropbox/Howest/Semester_5/GameArt/cute_lpc_doors_x.png" width="192" height="77"/>
+ </tileset>
+ <tileset firstgid="262" name="cute_lpc_doors_y" tilewidth="77" tileheight="96" tilecount="2" columns="2">
+  <image source="D:/Dropbox/Dropbox/Howest/Semester_5/GameArt/cute_lpc_doors_y.png" width="154" height="96"/>
+ </tileset>
+ <layer name="backgroundLayer" width="11" height="18">
+  <data encoding="csv">
+180,1610612934,1610612934,1610612934,1610612934,1610612934,1610612934,1610612934,1610612934,1610612934,2684354740,
+196,0,0,0,0,0,0,0,0,0,198,
+196,0,120,120,120,120,120,120,120,0,198,
+196,0,120,10,89,10,27,26,120,0,198,
+196,0,120,72,26,27,10,120,120,0,198,
+196,0,120,120,27,120,10,26,120,0,198,
+196,0,120,11,10,11,120,27,120,0,198,
+196,0,120,11,120,26,72,72,120,0,198,
+196,0,120,72,11,10,26,72,120,0,198,
+196,0,120,27,11,10,26,26,120,0,198,
+196,0,120,11,89,11,10,10,120,0,198,
+196,0,120,72,120,11,10,89,120,0,198,
+196,0,120,10,26,72,72,27,120,0,198,
+196,0,120,11,120,89,72,26,120,0,198,
+196,0,120,89,26,11,89,10,120,0,198,
+196,0,120,120,120,120,120,120,120,0,198,
+196,0,0,0,0,0,0,0,0,0,198,
+1610612916,2684354758,2684354758,2684354758,2684354758,2684354758,2684354758,2684354758,2684354758,2684354758,3221225652
+</data>
+ </layer>
+ <layer name="blockedLayer" width="11" height="18">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,
+0,152,216,216,216,216,216,216,216,153,0,
+0,199,152,216,216,216,216,216,153,201,0,
+0,199,199,0,0,0,0,0,201,201,0,
+0,199,199,0,0,0,0,0,201,201,0,
+0,199,199,0,0,0,0,0,201,201,0,
+0,199,199,0,0,0,0,0,201,201,0,
+0,199,199,0,0,0,0,0,201,201,0,
+0,199,38,0,0,0,0,0,201,201,0,
+0,199,199,0,0,0,0,0,201,201,0,
+0,199,199,0,0,0,0,0,199,199,0,
+0,199,199,0,0,0,0,0,199,199,0,
+0,199,199,0,0,0,0,0,201,201,0,
+0,199,199,0,0,0,0,0,201,201,0,
+0,199,199,0,0,0,0,0,201,201,0,
+0,201,168,184,184,184,184,184,169,201,0,
+0,168,184,184,184,184,184,184,184,169,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer name="Doors" width="11" height="18" visible="0">
+  <data encoding="csv">
+0,0,0,0,12,13,14,0,0,0,0,
+0,0,0,0,28,29,30,0,0,0,0,
+0,0,0,0,44,45,46,0,0,0,0,
+0,0,0,0,60,61,62,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="objectsLayer">
+  <object id="22" name="Door_2_down" gid="260" x="128" y="99" width="96" height="77">
+   <properties>
+    <property name="sprite" value="cute_lpc_doors_x_down"/>
+    <property name="targetTileMap" value="room_3"/>
+    <property name="type" value="door"/>
+   </properties>
+  </object>
+  <object id="27" name="PlayerStart" gid="1" x="168" y="236" width="32" height="32">
+   <properties>
+    <property name="type" value="playerStart"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

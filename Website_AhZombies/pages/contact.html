@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <title>Ah Zombies</title>
+    <link rel="stylesheet" href="../public/css/uikit.almost-flat.min.css"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.24.3/css/components/slidenav.gradient.min.css"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.24.3/css/components/dotnav.gradient.min.css"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.24.3/css/components/slideshow.gradient.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous" defer></script>
+    <script src="../public/js/uikit.min.js"></script>
+    <script src="../public/js/components/slideshow.js"></script>
+    <script src="../public/js/components/slideshow-fx.js"></script>
+    <style>
+        body{
+            background-color: white;
+        }
+        .black {
+            background-color: black;
+        }
+        .wrapper{
+            display: flex;
+            flex-flow: wrap row;
+        }
+
+        .wrapper>*{
+            flex: 1 100%;
+        }
+    </style>
+</head>
+<body>
+<nav class="uk-navbar uk-margin-medium-bottom">
+    <ul class="uk-navbar-nav uk-hidden-small uk-margin-large-left">
+        <a href="" class="uk-navbar-brand">Logo</a>
+        <li class=""><a href="../index.html">Home</a></li>
+        <li><a href="game.html">Game</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <ul class="uk-navbar-nav uk-navbar-flip uk-hidden-small uk-margin-large-right">
+        <li class="uk-parent" data-uk-dropdown>
+            <a href="">Account</a>
+            <div class="uk-dropdown uk-dropdown-navbar">
+                <ul class="uk-nav uk-nav-navbar uk-nav-parent-icon">
+                    <li class="uk-text-center uk-text-bold">Sign In</li>
+                    <li class="uk-text-center uk-margin-top"><input type="text" placeholder="Fill in Username" name="username" id="usernameID" /></li>
+                    <li class="uk-text-center uk-margin-top"><input type="password" placeholder="Fill in Password" name="password" id="passwordID" /></li>
+                    <li class="uk-text-center uk-margin-top"><button class="uk-button">Sign In</button>&nbsp;&nbsp;
+                        <button class="uk-button"><a href="signup.html">Sign Up</a></button></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+    <ul class="uk-navbar-nav uk-visible-small">
+        <a href="#my-id" class="uk-navbar-toggle" data-uk-offcanvas></a>
+        <li class="uk-navbar-content">MENU</li>
+    </ul>
+</nav>
+<div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
+    <div class="my-container">
+
+        <div class="uk-panel uk-panel-box uk-width-1-2 uk-align-center">
+            <h3 class="uk-panel-title uk-tab-center">Contact us</h3>
+            <form class="uk-form ">
+                <fieldset>
+                    <div class="uk-form-row">
+                        <div class="uk-form-controls">
+                            <input class="uk-display-block" type="text" id="form-input-name" placeholder="Name" required>
+                            <input class="uk-display-block uk-margin-small-top" type="email" id="form-input-email"
+                                   placeholder="Email" required>
+                            <textarea class="uk-display-block uk-margin-small-top" name="form-input-message"
+                                      id="form-input-message" cols="30" rows="10" placeholder="Message" required></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="uk-button uk-button-primary uk-margin-top  uk-margin-bottom-remove">Send</button>
+                </fieldset>
+
+            </form>
+
+        </div>
+
+
+    </div>
+</div>
+<div id="my-id" class="uk-offcanvas">
+    <div class="uk-offcanvas-bar">
+        <ul class="uk-nav uk-nav-offcanvas uk-nav-parent-icon" data-uk-nav>
+            <li class="uk-active"><a href="">Home</a></li>
+            <li><a href="">Game</a></li>
+            <li><a href="">Sign In</a></li>
+            <li><a href="">Sign Up</a></li>
+            <li><a href="">Contact</a></li>
+        </ul>
+    </div>
+</div>
+<div class="black uk-contrast uk-block-large wrapper uk-text-center">
+    <h1 class=" uk-heading-large ">Ah! Zombies</h1>
+    <div>
+        <a href="">Home</a>
+        |
+        <a href="">Game</a>
+        |
+        <a href="">Contact</a>
+    </div>
+</div>
+</body>
+</html>
