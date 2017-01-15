@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Phaser 2D tutorial</title>
+
+    <script type="text/javascript" src="js/phaser.js"></script>
+    <script type="text/javascript" src="js/Boot.js"></script>
+    <script type="text/javascript" src="js/Preload.js"></script>
+    <script type="text/javascript" src="js/Game.js"></script>
+    <script type="text/javascript" src="js/Game2.js"></script>
+
+    <style media="screen">
+        body {
+            padding: 0px;
+            margin: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+        var socket = io();
+        var idSet = false;
+        var buddies = {};
+        var myId;
+        var game = TopDownGame.game;
+
+        socket.on('yourId', function(data) {
+            setId(data.id);
+        });
+
+        function setId(id) {
+            if (!idSet) {
+                console.log("my id:" + id);
+                myId = id;
+                idSet = true;
+            }
+        }
+
+        socket.on('newBuddy', function(data) {
+            console.log("data.id: " + buddies[data.id]);
+            if (myId != data.id && !buddies[data.id] && data.x !== undefined) {
+
+                console.log("NEW BUDDY");
+
+                // // adding player
+                console.log("x: " + data.x);
+                console.log("y: " + data.y);
+                test = game.add.sprite(50, 270, 'dude');
+
+                //enable physics on player
+                game.physics.arcade.enable(test);
+
+                //giving the player physics properties
+                test.body.bounce.y = 0.3;
+                test.body.gravity.y = 300;
+                test.body.collideWorldBounds = true;
+
+                test.body.moves = false;
+
+                //adding animations to player when walking
+                test.animations.add('left', [0, 1, 2, 3], 10, true);
+                test.animations.add('right', [5, 6, 7, 8], 10, true);
+
+                test.id = data.id;
+
+                // otherPlayers.add(test);
+                buddies[data.id] = test;
+            }
+        });
+    </script>
+</body>
+
+</html>

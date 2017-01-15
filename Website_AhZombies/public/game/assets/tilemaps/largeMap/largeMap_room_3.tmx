@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="11" tilewidth="32" tileheight="32" nextobjectid="31">
+ <tileset firstgid="1" name="Tiled-test" tilewidth="32" tileheight="32" tilecount="3" columns="3">
+  <image source="D:/Dropbox/Dropbox/Howest/Semester_5/GameArt/Tiled-test.png" width="96" height="32"/>
+ </tileset>
+ <tileset firstgid="4" name="cute_lpc" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="D:/Dropbox/Dropbox/Howest/Semester_5/GameArt/cute_lpc.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="260" name="cute_lpc_doors_x" tilewidth="96" tileheight="77" tilecount="2" columns="2">
+  <image source="D:/Dropbox/Dropbox/Howest/Semester_5/GameArt/cute_lpc_doors_x.png" width="192" height="77"/>
+ </tileset>
+ <tileset firstgid="262" name="cute_lpc_doors_y" tilewidth="77" tileheight="96" tilecount="2" columns="2">
+  <image source="D:/Dropbox/Dropbox/Howest/Semester_5/GameArt/cute_lpc_doors_y.png" width="154" height="96"/>
+ </tileset>
+ <layer name="backgroundLayer" width="20" height="11">
+  <data encoding="csv">
+180,1610612934,1610612934,1610612934,1610612934,1610612934,1610612934,1610612934,1610612934,1610612934,1610612934,1610612934,1610612934,1610612934,1610612934,1610612934,1610612934,1610612934,1610612934,2684354740,
+196,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,198,
+196,0,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,0,198,
+196,0,120,26,89,89,10,89,89,26,72,10,27,120,10,27,27,120,0,198,
+196,0,120,11,11,11,11,11,26,10,26,120,10,89,26,11,11,120,0,198,
+196,0,120,120,10,120,11,26,27,120,26,120,26,10,120,89,10,120,0,198,
+196,0,120,27,10,11,10,26,120,27,89,10,89,120,10,120,26,120,0,198,
+196,0,120,89,10,27,27,72,11,0,120,10,10,72,26,10,89,120,0,198,
+196,0,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,0,198,
+196,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,198,
+1610612916,2684354758,2684354758,2684354758,2684354758,2684354758,2684354758,2684354758,2684354758,2684354758,2684354758,2684354758,2684354758,2684354758,2684354758,2684354758,2684354758,2684354758,2684354758,3221225652
+</data>
+ </layer>
+ <layer name="blockedLayer" width="20" height="11">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,0,0,0,0,
+0,152,216,216,216,216,216,216,216,216,216,216,216,216,216,216,216,216,153,0,
+0,199,152,216,216,216,216,216,216,216,216,216,216,216,216,216,216,153,201,0,
+0,199,199,0,0,0,0,0,0,0,0,0,0,0,0,0,0,201,201,0,
+0,199,199,0,0,0,0,0,0,0,0,0,0,0,0,0,0,201,201,0,
+203,199,199,0,0,0,0,0,0,0,0,0,0,0,0,0,0,201,201,0,
+0,199,199,0,0,0,0,0,0,0,0,0,0,0,0,0,0,201,201,0,
+0,199,199,0,0,0,0,0,0,0,0,0,0,0,0,0,0,201,201,0,
+0,199,168,184,184,184,184,184,184,184,184,184,184,184,184,184,184,169,201,0,
+0,168,184,184,184,184,184,184,184,184,184,184,184,184,184,184,184,184,169,0,
+0,0,0,0,0,0,0,0,0,0,125,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer name="Doors" width="20" height="11" visible="0">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,12,13,14,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,28,29,30,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,44,45,46,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,60,61,62,0,0,0,0,0,0,0,0,
+187,188,189,190,0,0,0,0,0,0,0,0,0,0,0,0,139,140,141,142,
+203,204,205,206,0,0,0,0,0,0,0,0,0,0,0,0,155,156,157,158,
+219,220,221,222,0,0,0,0,0,0,0,0,0,0,0,0,171,172,173,174,
+0,0,0,0,0,0,0,0,0,76,77,78,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,92,93,94,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,108,109,110,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="objectsLayer">
+  <object id="14" name="Door_3_left" gid="262" x="541" y="224" width="77" height="96">
+   <properties>
+    <property name="sprite" value="cute_lpc_doors_y_left"/>
+    <property name="type" value="door"/>
+   </properties>
+  </object>
+  <object id="19" name="Door_3_up" gid="261" x="288.33" y="330" width="96" height="77">
+   <properties>
+    <property name="sprite" value="cute_lpc_doors_x_up"/>
+    <property name="type" value="door"/>
+   </properties>
+  </object>
+  <object id="11" name="Door_3_right" gid="263" x="21.33" y="223.667" width="77" height="96">
+   <properties>
+    <property name="sprite" value="cute_lpc_doors_y_right"/>
+    <property name="type" value="door"/>
+   </properties>
+  </object>
+  <object id="23" name="Door_3_down" gid="260" x="287.67" y="100" width="96" height="77">
+   <properties>
+    <property name="sprite" value="cute_lpc_doors_x_down"/>
+    <property name="type" value="door"/>
+   </properties>
+  </object>
+  <object id="30" name="PlayerStart" gid="1" x="505" y="193" width="32" height="32">
+   <properties>
+    <property name="type" value="playerStart"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

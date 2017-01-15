@@ -1,0 +1,88 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        title Ah!Zombies | Home
+        link(rel='stylesheet', href='public/css/uikit.almost-flat.min.css')
+        link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/uikit/2.24.3/css/components/slidenav.gradient.min.css')
+        link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/uikit/2.24.3/css/components/dotnav.gradient.min.css')
+        link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/uikit/2.24.3/css/components/slideshow.gradient.min.css')
+        script(src='https://code.jquery.com/jquery-3.1.1.min.js', integrity='sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=', crossorigin='anonymous', defer='')
+        link(rel='stylesheet', href='public/css/style.css')
+        script(src='public/js/uikit.min.js', defer='')
+        script(src='public/js/components/slideshow.min.js', defer='')
+        script(src='public/js/components/slideshow-fx.min.js', defer='')
+
+    body
+        nav.uk-navbar.uk-margin-medium-bottom
+            ul.uk-navbar-nav.uk-hidden-small.uk-margin-large-left
+                a.uk-navbar-brand(href='') Ah!Zombies
+                li
+                    a(href='/') Home
+                li
+                    a(href='game') Game
+                li
+                    a(href='contact') Contact
+            ul.uk-navbar-nav.uk-navbar-flip.uk-hidden-small.uk-margin-large-right
+                if (!user)
+                    li.uk-parent(data-uk-dropdown='')
+                        a(href='#') Account
+                        .uk-dropdown.uk-dropdown-navbar
+                            ul.uk-nav.uk-nav-navbar.uk-nav-parent-icon
+                                li.uk-text-center.uk-text-bold Sign In
+                                form.uk-form(role='form', action="/signin", method="post")
+                                    li.uk-text-center.uk-margin-top
+                                        input#usernameID.uk-form-small(type='text', placeholder='Username', name='username')
+                                    li.uk-text-center.uk-margin-top
+                                        input#passwordID.uk-form-small(type='password', placeholder='Password', name='password')
+                                    li.uk-text-center.uk-margin-top
+                                        button.uk-button.uk-button-primary(type='submit') Sign in
+                                        &nbsp;
+                                        button.uk-button
+                                            a(href='signup') Register
+                if (user)
+                    li.uk-parent(data-uk-dropdown='')
+                        a(href='#')= user.username
+                        .uk-dropdown.uk-dropdown-navbar
+                            ul.uk-nav.uk-nav-navbar.uk-nav-parent-icon
+                                li.uk-nav-header Account details
+                                li
+                                    a(href="account") Account
+
+                                li.uk-nav-divider
+                                li.uk-margin-top
+                                    a(href="logout") Log out
+                                        //button.uk-button.uk-button-danger.uk-width-1-1 Log out
+ul.uk-navbar-nav.uk-visible-small
+    a.uk-navbar-toggle(href='#my-id', data-uk-offcanvas="{mode: 'slide'}")
+    li.uk-navbar-content MENU
+
+.uk-alert.uk-alert-danger.uk-text-center.uk-alert-large(data-uk-alert='')
+    h2 We could not find the page you were looking for.
+    p Please try again.
+
+.uk-container.uk-container-center.uk-margin-top.uk-margin-large-bottom
+    .uk-grid(data-uk-grid-margin='')
+        .uk-container-center
+
+#my-id.uk-offcanvas
+    .uk-offcanvas-bar
+        ul.uk-nav.uk-nav-offcanvas.uk-nav-parent-icon(data-uk-nav='')
+            li.uk-active
+                a(href='/') Home
+            li
+                a(href='game') Game
+            li
+                a(href='signin') Sign In
+            li
+                a(href='signup') Sign Up
+            li
+                a(href='contact') Contact
+.black.uk-contrast.uk-block-large.wrapper.uk-text-center.uk-position-bottom
+    h1.uk-heading-large Ah! Zombies
+    div
+        a(href='') Home
+        |         |
+        a(href='') Game
+        |         |
+        a(href='') Contact
