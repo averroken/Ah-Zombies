@@ -1,5 +1,4 @@
 var TopDownGame = TopDownGame ||  {};
-var player = player || {};
 
 TopDownGame.game = new Phaser.Game(600, 300, Phaser.AUTO, 'game');
 
@@ -17,6 +16,6 @@ TopDownGame.game.state.add('room_5', TopDownGame.room_5);
 TopDownGame.game.state.add('room_6', TopDownGame.room_6);
 TopDownGame.game.state.add('room_7', TopDownGame.room_7);
 TopDownGame.game.state.add('room_8', TopDownGame.room_8);
-TopDownGame.game.state.add('mini_game', TopDownGame.test_game);
+
 
 TopDownGame.game.state.start('Boot');

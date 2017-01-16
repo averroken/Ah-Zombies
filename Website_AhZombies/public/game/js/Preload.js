@@ -39,10 +39,6 @@ TopDownGame.Preload.prototype = {
         this.load.image('cute_lpc_doors_y_left', 'public/game/assets/images/cute_lpc_doors_y_left.png');
         this.load.image('cute_lpc_chest', 'public/game/assets/images/cute_lpc_chest.png');
 
-        this.load.image('player2', 'public/game/assets/survivor-shoot_rifle_0.png');
-        this.load.spritesheet('enemy', 'public/game/assets/zombie_topdown.png',128,128);
-        this.load.image('bullet','public/game/assets/bullet.png');
-        this.load.image('background', 'public/game/assets/background.jpg');
     },
     create: function () {
         this.state.start('room_1');

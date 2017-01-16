@@ -46,7 +46,7 @@
                  "properties":
                     {
                      "sprite":"cute_lpc_doors_y_left",
-                     "targetTileMap":"room_4",
+                     "targetTileMap":"room_4|left",
                      "type":"door"
                     },
                  "propertytypes":
@@ -70,7 +70,7 @@
                  "properties":
                     {
                      "sprite":"cute_lpc_doors_y_right",
-                     "targetTileMap":"room_6",
+                     "targetTileMap":"room_6|right",
                      "type":"door"
                     },
                  "propertytypes":
@@ -89,24 +89,50 @@
                 {
                  "gid":1,
                  "height":32,
-                 "id":27,
+                 "id":28,
                  "name":"PlayerStart",
                  "properties":
                     {
                      "offset":-50,
+                     "spawnPoint":"right",
                      "type":"playerStart"
                     },
                  "propertytypes":
                     {
                      "offset":"int",
+                     "spawnPoint":"string",
                      "type":"string"
                     },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":411.643564356436,
-                 "y":352.910891089109
+                 "x":407,
+                 "y":355
+                }, 
+                {
+                 "gid":1,
+                 "height":32,
+                 "id":29,
+                 "name":"PlayerStart",
+                 "properties":
+                    {
+                     "offset":-60,
+                     "spawnPoint":"left",
+                     "type":"playerStart"
+                    },
+                 "propertytypes":
+                    {
+                     "offset":"int",
+                     "spawnPoint":"string",
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":291,
+                 "y":352
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -115,7 +141,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":28,
+ "nextobjectid":30,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,
@@ -123,7 +149,7 @@
         {
          "columns":3,
          "firstgid":1,
-         "image":"..\/..\/..\/..\/..\/..\/..\/Dropbox\/Howest\/Semester_5\/GameArt\/Tiled-test.png",
+         "image":"..\/..\/..\/..\/..\/Semester_5\/GameArt\/Tiled-test.png",
          "imageheight":32,
          "imagewidth":96,
          "margin":0,
@@ -136,46 +162,7 @@
         {
          "columns":16,
          "firstgid":4,
-         "image":"..\/..\/..\/..\/..\/..\/..\/Dropbox\/Howest\/Semester_5\/GameArt\/cute_lpc.png",
-         "imageheight":512,
-         "imagewidth":512,
-         "margin":0,
-         "name":"cute_lpc",
-         "spacing":0,
-         "tilecount":256,
-         "tileheight":32,
-         "tilewidth":32
-        }, 
-        {
-         "columns":2,
-         "firstgid":260,
-         "image":"..\/..\/..\/..\/..\/..\/..\/Dropbox\/Howest\/Semester_5\/GameArt\/cute_lpc_doors_x.png",
-         "imageheight":77,
-         "imagewidth":192,
-         "margin":0,
-         "name":"cute_lpc_doors_x",
-         "spacing":0,
-         "tilecount":2,
-         "tileheight":77,
-         "tilewidth":96
-        }, 
-        {
-         "columns":2,
-         "firstgid":262,
-         "image":"..\/..\/..\/..\/..\/..\/..\/Dropbox\/Howest\/Semester_5\/GameArt\/cute_lpc_doors_y.png",
-         "imageheight":96,
-         "imagewidth":154,
-         "margin":0,
-         "name":"cute_lpc_doors_y",
-         "spacing":0,
-         "tilecount":2,
-         "tileheight":96,
-         "tilewidth":77
-        }, 
-        {
-         "columns":16,
-         "firstgid":264,
-         "image":"..\/..\/..\/..\/..\/..\/..\/Dropbox\/Howest\/Semester_5\/GameArt\/cute_lpc.png",
+         "image":"..\/..\/..\/..\/..\/Semester_5\/GameArt\/cute_lpc.png",
          "imageheight":512,
          "imagewidth":512,
          "margin":0,
@@ -197,6 +184,45 @@
                  "type":"string"
                 }
             },
+         "tilewidth":32
+        }, 
+        {
+         "columns":2,
+         "firstgid":260,
+         "image":"..\/..\/..\/..\/..\/Semester_5\/GameArt\/cute_lpc_doors_x.png",
+         "imageheight":77,
+         "imagewidth":192,
+         "margin":0,
+         "name":"cute_lpc_doors_x",
+         "spacing":0,
+         "tilecount":2,
+         "tileheight":77,
+         "tilewidth":96
+        }, 
+        {
+         "columns":2,
+         "firstgid":262,
+         "image":"..\/..\/..\/..\/..\/Semester_5\/GameArt\/cute_lpc_doors_y.png",
+         "imageheight":96,
+         "imagewidth":154,
+         "margin":0,
+         "name":"cute_lpc_doors_y",
+         "spacing":0,
+         "tilecount":2,
+         "tileheight":96,
+         "tilewidth":77
+        }, 
+        {
+         "columns":16,
+         "firstgid":264,
+         "image":"..\/..\/..\/..\/..\/Semester_5\/GameArt\/cute_lpc.png",
+         "imageheight":512,
+         "imagewidth":512,
+         "margin":0,
+         "name":"cute_lpc",
+         "spacing":0,
+         "tilecount":256,
+         "tileheight":32,
          "tilewidth":32
         }],
  "tilewidth":32,

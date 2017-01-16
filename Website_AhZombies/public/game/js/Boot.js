@@ -14,4 +14,4 @@ TopDownGame.Boot.prototype = {
 
         this.state.start('Preload');
     }
-}
+};
