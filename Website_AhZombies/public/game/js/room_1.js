@@ -2,6 +2,11 @@ var TopDownGame = TopDownGame ||  {};
 
 TopDownGame.room_1 = function() {};
 
+var button;
+var popup;
+var tween = null;
+
+
 TopDownGame.room_1.prototype = {
     create: function() {
         this.createMap();
@@ -41,10 +46,55 @@ TopDownGame.room_1.prototype = {
         this.cursors = this.game.input.keyboard.createCursorKeys();
 
         this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
-        this.game.input.onDown.add(this.gofull, this);
+        //this.game.input.onDown.add(this.gofull, this);
+
+        var style = { font: "14px Arial", fill: "#ff0044", align: "center" };
+        var text = this.game.add.text(400, 750, "Controls", style);
+        text.inputEnabled = true;
+        text.events.onInputDown.add(this.openWindow, this);
+
+        text.alpha = 0.8;
+        text.anchor.set(0.5);
+        text.inputEnabled = true;
+        text.input.enableDrag();
+
+        //  Position the close button to the top-right of the popup sprite (minus 8px for spacing)
+        var pw = (text.width / 2) - 30;
+        var ph = (text.height / 2) - 8;
+
+        //  And click the close button to close it down again
+        //var closeButton = game.make.sprite(pw, -ph, 'close');
+        //closeButton.inputEnabled = true;
+       // closeButton.input.priorityID = 1;
+       // closeButton.input.useHandCursor = true;
+       // closeButton.events.onInputDown.add(this.closeWindow, this);
+
+        //  Add the "close button" to the popup window image
+        //popup.addChild(closeButton);
+
+        //  Hide it awaiting a click
+        //popup.scale.set(0);
 
         this.createItems();
         this.createDoors();
+    },
+    openWindow: function () {
+        if ((tween !== null && tween.isRunning) || popup.scale.x === 1)
+        {
+            return;
+        }
+
+        //  Create a tween that will pop-open the window, but only if it's not already tweening or open
+        tween = game.add.tween(popup.scale).to( { x: 1, y: 1 }, 1000, Phaser.Easing.Elastic.Out, true);
+        //popup.visible = true;
+    },
+    closeWindow: function () {
+        if (tween && tween.isRunning || popup.scale.x === 0.1)
+        {
+            return;
+        }
+        //  Create a tween that will close the window, but only if it's not already tweening or closed
+        tween = game.add.tween(popup.scale).to( { x: 0, y: 0}, 500, Phaser.Easing.Elastic.In, true);
     },
     gofull: function(){
         if (this.game.scale.isFullScreen)
