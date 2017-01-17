@@ -160,7 +160,7 @@ TopDownGame.room_1.prototype = {
         console.log('targetTileMap: ' + targetRoom[0]);
         console.log('targetSpawnPoint: ' + targetRoom[1]);
 
-        TopDownGame.game.state.states[targetRoom[0]].position = targetRoom[1];
+        // TopDownGame.game.state.states[targetRoom[0]].position = targetRoom[1];
         TopDownGame.game.state.start(targetRoom[0]);
     },
     update: function() {

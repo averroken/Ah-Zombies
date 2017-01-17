@@ -8,6 +8,7 @@ TopDownGame.game.state.add('Preload', TopDownGame.Preload);
 TopDownGame.game.state.add('Game', TopDownGame.Game);
 TopDownGame.game.state.add('Level2', TopDownGame.Game2);
 TopDownGame.game.state.add('largeMapTest', TopDownGame.largeMap);
+TopDownGame.game.state.add('Menu', TopDownGame.Menu);
 TopDownGame.game.state.add('room_1', TopDownGame.room_1);
 TopDownGame.game.state.add('room_2', TopDownGame.room_2);
 TopDownGame.game.state.add('room_3', TopDownGame.room_3);
