@@ -20,7 +20,12 @@ body {
 }
 .chat {
     height: 100px;
-    overflow: auto;
+    overflow-y: auto;
+}
+
+.chat > ul {
+    list-style: none;
+    padding-left: 0;
 }
 
 .game_error {

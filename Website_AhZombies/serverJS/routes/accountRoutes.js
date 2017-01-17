@@ -1,6 +1,7 @@
 const passport = require('passport');
 const bodyParser = require('body-parser');
 var Account = require('../models/account');
+let time = new Date();
 // const jwt = require('jsonwebtoken');
 // const async = require('async');
 // const crypto = require('crypto');
@@ -16,7 +17,7 @@ function isAuthenticated(req, res, next) {
     })
 }
 
-module.exports = function (app) {
+module.exports = function (app, io) {
     /*********SIGN IN*********/
     app.get('/signin', function (req, res) {
         var info = req.flash('error');
@@ -101,5 +102,20 @@ module.exports = function (app) {
                 // res.status(404).send('no account found');
             }
         });
-    })
+    });
+
+
+    io.on('connection', function(socket) {
+        socket.on('chat message', function(message) {
+            time = new Date();
+            // console.log("------> chat message: " + message.message);
+            // console.log("------> chat user: " + message.user);
+            // console.log("------> chat time: " + time.getHours() + ":" + time.getMinutes());
+            io.emit('message', {
+                message: message.message,
+                user: message.user,
+                time: time.getHours() + ":" + time.getMinutes()
+            });
+        });
+    });
 };

@@ -41,7 +41,7 @@ TopDownGame.room_1.prototype = {
         this.cursors = this.game.input.keyboard.createCursorKeys();
 
         this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
-        // this.game.input.onDown.add(this.gofull, this);
+        this.game.input.onDown.add(this.gofull, this);
 
         this.createItems();
         this.createDoors();

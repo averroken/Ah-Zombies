@@ -7,10 +7,11 @@ html(lang='en')
         link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/uikit/2.24.3/css/components/slidenav.gradient.min.css')
         link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/uikit/2.24.3/css/components/dotnav.gradient.min.css')
         link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/uikit/2.24.3/css/components/slideshow.gradient.min.css')
-        //script(src='https://code.jquery.com/jquery-3.1.1.min.js', integrity='sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=', crossorigin='anonymous', defer='')
+        script(src='https://code.jquery.com/jquery-3.1.1.min.js', integrity='sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=', crossorigin='anonymous', defer='')
         link(rel='stylesheet', href='public/css/style.css')
         script(src='public/js/uikit.min.js', defer='')
         script(src='public/js/jquery-3.1.1.min.js')
+        block extraScripts
 
     body
         nav.uk-navbar.uk-margin-medium-bottom
@@ -51,6 +52,10 @@ html(lang='en')
                                 li.uk-margin-top
                                     a(href="logout") Log out
                                         //button.uk-button.uk-button-danger.uk-width-1-1 Log out
-ul.uk-navbar-nav.uk-visible-small
-    a.uk-navbar-toggle(href='#my-id', data-uk-offcanvas="{mode: 'slide'}")
-    li.uk-navbar-content MENU
+    ul.uk-navbar-nav.uk-visible-small
+        a.uk-navbar-toggle(href='#my-id', data-uk-offcanvas="{mode: 'slide'}")
+        li.uk-navbar-content MENU
+
+    block body
+
+    block bottomScripts
