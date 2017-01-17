@@ -30,8 +30,8 @@ TopDownGame.Preload.prototype = {
 
         this.load.image('greencup', 'public/game/assets/images/greencup.png');
         this.load.image('bluecup', 'public/game/assets/images/bluecup.png');
-        this.load.image('player', 'public/game/assets/images/player.png');
-        this.load.image('dude', 'public/game/assets/images/player.png');
+        this.load.spritesheet('player', 'public/game/assets/player.png',139,125);
+        this.load.image('playerminigame', 'public/game/assets/survivor-shoot_rifle_0.png');
         this.load.image('browndoor', 'public/game/assets/images/browndoor.png');
         this.load.image('cute_lpc_doors_x_up', 'public/game/assets/images/cute_lpc_doors_x_up.png');
         this.load.image('cute_lpc_doors_x_down', 'public/game/assets/images/cute_lpc_doors_x_down.png');
@@ -39,6 +39,16 @@ TopDownGame.Preload.prototype = {
         this.load.image('cute_lpc_doors_y_left', 'public/game/assets/images/cute_lpc_doors_y_left.png');
         this.load.image('cute_lpc_chest', 'public/game/assets/images/cute_lpc_chest.png');
 
+        //MiniGame
+        this.load.spritesheet('enemy', 'public/game/assets/zombie_topdown.png',128,128);
+        this.load.image('bullet','public/game/assets/bullet.png');
+        this.load.image('background', 'public/game/assets/background.jpg');
+
+        this.load.image('menu_title', 'public/game/assets/menu/title.png');
+        this.load.image('play_button', 'public/game/assets/menu/play_button.png');
+        this.load.image('how_to_button', 'public/game/assets/menu/how_to_button.png');
+        this.load.image('credits_button', 'public/game/assets/menu/credits_button.png');
+        this.load.image('city', 'public/game/assets/menu/landscape.png');
     },
     create: function () {
         this.state.start('room_1');

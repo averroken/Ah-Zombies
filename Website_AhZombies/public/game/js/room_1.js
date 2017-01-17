@@ -18,8 +18,23 @@ TopDownGame.room_1.prototype = {
         // var result = this.findObjectsByType('playerStart', this.map, 'objectsLayer');
         var result = this.findSpawnPoint('playerStart', this.map, 'objectsLayer', this.position);
 
-        this.player = this.game.add.sprite(result[0].x, result[0].y, 'player');
+        this.player = this.game.add.sprite(result[0].x, result[0].y, 'player',10);
         this.player.id = Player.Id;
+        this.player.anchor.setTo(0.45, 0.45);
+        this.player.angle = 0;
+        this.player.scale.setTo(0.30,0.30);
+        this.player.animations.add('walk',[3,7,2,6,1,5],5,true);
+
+
+        //Weapon
+        this.weapon = this.add.weapon(30, 'bullet');
+        this.weapon.fireRate = 300;
+        this.weapon.bulletSpeed = 100;
+        // this.weapon.bullets.scale.setTo(0.9,0.9);
+        this.weapon.trackSprite(this.player,23,3,true);
+        firebutton = this.input.activePointer.isDown;
+// x- y+
+        this.cursors = this.game.input.keyboard.createCursorKeys();
         console.log("My id: "+ Player.Id);
 
         socket.emit('getPlayers');
@@ -41,7 +56,7 @@ TopDownGame.room_1.prototype = {
         this.cursors = this.game.input.keyboard.createCursorKeys();
 
         this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
-        this.game.input.onDown.add(this.gofull, this);
+        //this.game.input.onDown.add(this.gofull, this);
 
         this.createItems();
         this.createDoors();
@@ -163,6 +178,9 @@ TopDownGame.room_1.prototype = {
         // TopDownGame.game.state.states[targetRoom[0]].position = targetRoom[1];
         TopDownGame.game.state.start(targetRoom[0]);
     },
+    killBullet: function(bullet){
+        bullet.kill();
+    },
     update: function() {
         // console.log(this.count);
         var boolMoved=false;
@@ -170,21 +188,36 @@ TopDownGame.room_1.prototype = {
         this.player.body.velocity.x = 0;
 
         if (this.cursors.up.isDown) {
+            this.player.animations.play('walk');
             this.player.body.velocity.y -= this.player.velocity;
             boolMoved=true;
         } else if (this.cursors.down.isDown) {
+            this.player.animations.play('walk');
             this.player.body.velocity.y += this.player.velocity;
             boolMoved=true;
         }
-        if (this.cursors.left.isDown) {
+        else if (this.cursors.left.isDown) {
+            this.player.animations.play('walk');
             this.player.body.velocity.x -= this.player.velocity;
             boolMoved=true;
         } else if (this.cursors.right.isDown) {
+            this.player.animations.play('walk');
             this.player.body.velocity.x += this.player.velocity;
             boolMoved=true;
+        } else {
+            this.player.animations.stop();
+            this.player.frame = 3;
         }
 
+        this.player.rotation = this.physics.arcade.angleToPointer(this.player);
+
+        console.log(this.player.rotation);
+        if (this.input.activePointer.isDown || this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+            this.player.frame = 0;
+            this.weapon.fire();
+        }
         this.game.physics.arcade.collide(this.player, this.blockedLayer);
+        this.game.physics.arcade.collide(this.weapon.bullets, this.blockedLayer, this.killBullet,null,this);
         this.game.physics.arcade.overlap(this.player, this.items, this.collect, null, this);
         this.game.physics.arcade.overlap(this.player, this.doors, this.enterDoor, null, this);
         if(boolMoved) {
