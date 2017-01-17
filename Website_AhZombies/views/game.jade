@@ -1,22 +1,22 @@
 extends header
 //include ./header
 
+block title
+    title Ah!Zombies | Game
+
 block extraScripts
-    script(type='text/javascript', src='public/game/js/phaser.js')
-    script(type='text/javascript', src='public/game/js/Boot.js')
-    script(type='text/javascript', src='public/game/js/Preload.js')
-    script(type='text/javascript', src='public/game/js/Game.js')
-    script(type='text/javascript', src='public/game/js/Game2.js')
-    script(type='text/javascript', src='public/game/js/largeMapTest.js')
-    script(type='text/javascript', src='public/game/js/room_1.js')
-    script(type='text/javascript', src='public/game/js/room_2.js')
-    script(type='text/javascript', src='public/game/js/room_3.js')
-    script(type='text/javascript', src='public/game/js/room_4.js')
-    script(type='text/javascript', src='public/game/js/room_5.js')
-    script(type='text/javascript', src='public/game/js/room_6.js')
-    script(type='text/javascript', src='public/game/js/room_7.js')
-    script(type='text/javascript', src='public/game/js/room_8.js')
-    script(type='text/javascript', src='public/game/js/mini_game.js')
+    script(type='text/javascript', src='public/game/js/min/phaser.min.js')
+    script(type='text/javascript', src='public/game/js/min/Boot.js')
+    script(type='text/javascript', src='public/game/js/min/Preload.js')
+    script(type='text/javascript', src='public/game/js/min/room_1.js', async='')
+    script(type='text/javascript', src='public/game/js/min/room_2.js', async='')
+    script(type='text/javascript', src='public/game/js/min/room_3.js', async='')
+    script(type='text/javascript', src='public/game/js/min/room_4.js', async='')
+    script(type='text/javascript', src='public/game/js/min/room_5.js', async='')
+    script(type='text/javascript', src='public/game/js/min/room_6.js', async='')
+    script(type='text/javascript', src='public/game/js/min/room_7.js', async='')
+    script(type='text/javascript', src='public/game/js/min/room_8.js', async='')
+    script(type='text/javascript', src='public/game/js/min/mini_game.js', async='')
 
 
     //meta(charset='UTF-8')
@@ -45,10 +45,30 @@ block body
                         .uk-form-controls
                             input#form-input-message.uk-display-block.uk-position-bottom.uk-width-1-1(type='text', placeholder='Message')
 
-include ./footer
+    #my-id.uk-offcanvas
+        .uk-offcanvas-bar
+            ul.uk-nav.uk-nav-offcanvas.uk-nav-parent-icon(data-uk-nav='')
+                li.uk-active
+                    a(href='/') Home
+                li
+                    a(href='game') Game
+                li
+                    a(href='signin') Sign In
+                li
+                    a(href='signup') Sign Up
+                li
+                    a(href='contact') Contact
+    .black.uk-contrast.uk-block-large.wrapper.uk-text-center
+        h1.uk-heading-large Ah! Zombies
+        div
+            a(href='') Home
+                |  |
+            a(href='') Game
+            |         |
+            a(href='') Contact
 
 block bottomScripts
-    script(type='text/javascript', src='public/game/js/main.js')
+    script(type='text/javascript', src='public/game/js/min/main.js')
     script(src='/socket.io/socket.io.js')
     script(type='text/javascript').
         var socket = io();

@@ -1,16 +1,40 @@
-include ./header
+extends header
 
-.uk-container.uk-container-center.uk-margin-top.uk-margin-large-bottom
-    .my-container
-        .uk-panel.uk-panel-box.uk-width-large-1-2.uk-width-small-1-1.uk-align-center
-            h3.uk-panel-title.uk-tab-center Contact us
-            form.uk-form
-                fieldset
-                    .uk-form-row
-                        .uk-form-controls
-                            input#form-input-name.uk-display-block.uk-width-1-1(type='text', placeholder='Name', required='')
-                            input#form-input-email.uk-display-block.uk-margin-small-top.uk-width-1-1(type='email', placeholder='Email', required='')
-                            textarea#form-input-message.uk-display-block.uk-margin-small-top.uk-width-1-1(name='form-input-message', cols='30', rows='10', placeholder='Message', required='')
-                    button.uk-button.uk-button-primary.uk-margin-top.uk-margin-bottom-remove(type='submit') Send
 
-include ./footer
+block title
+    title Ah!Zombies | Contact
+
+block body
+    .uk-container.uk-container-center.uk-margin-top.uk-margin-large-bottom
+        .my-container
+            .uk-panel.uk-panel-box.uk-width-large-1-2.uk-width-small-1-1.uk-align-center
+                h3.uk-panel-title.uk-tab-center Contact us
+                form.uk-form
+                    fieldset
+                        .uk-form-row
+                            .uk-form-controls
+                                input#form-input-name.uk-display-block.uk-width-1-1(type='text', placeholder='Name', required='')
+                                input#form-input-email.uk-display-block.uk-margin-small-top.uk-width-1-1(type='email', placeholder='Email', required='')
+                                textarea#form-input-message.uk-display-block.uk-margin-small-top.uk-width-1-1(name='form-input-message', cols='30', rows='10', placeholder='Message', required='')
+                        button.uk-button.uk-button-primary.uk-margin-top.uk-margin-bottom-remove(type='submit') Send
+    #my-id.uk-offcanvas
+        .uk-offcanvas-bar
+            ul.uk-nav.uk-nav-offcanvas.uk-nav-parent-icon(data-uk-nav='')
+                li.uk-active
+                    a(href='/') Homed
+                li
+                    a(href='game') Game
+                li
+                    a(href='signin') Sign In
+                li
+                    a(href='signup') Sign Up
+                li
+                    a(href='contact') Contact
+    .black.uk-contrast.uk-block-large.wrapper.uk-text-center
+        h1.uk-heading-large Ah! Zombies
+        div
+            a(href='') Home
+                |  |
+            a(href='') Game
+            |         |
+            a(href='') Contact

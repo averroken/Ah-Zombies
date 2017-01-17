@@ -1,77 +1,105 @@
-include ./header
+extends header
 
-head
+block title
+    title Ah!Zombies | Home
+
+block extraStyleSheets
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/uikit/2.24.3/css/components/slidenav.gradient.min.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/uikit/2.24.3/css/components/dotnav.gradient.min.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/uikit/2.24.3/css/components/slideshow.gradient.min.css')
+
+block extraScripts
     script(src='public/js/components/slideshow.min.js', defer='')
     script(src='public/js/components/slideshow-fx.min.js', defer='')
 
+block body
+    if(info)
+        .uk-alert.uk-alert-success.uk-text-center(data-uk-alert='')
+            p.uk-display-inline= info
+    .uk-container.uk-container-center.uk-margin-top.uk-margin-large-bottom
+        .uk-grid(data-uk-grid-margin='')
+            .uk-container-center
+                .uk-slidenav-position(data-uk-slideshow='{autoplay:true}')
+                    ul.uk-slideshow
+                        li
+                            img(src='public/images/2.jpg')
+                            .uk-overlay-panel.uk-overlay-background.uk-overlay-bottom
+                                h1 Function 1
+                                p
+                                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum felis ligula,
+                                    | auctor fermentum tempor id, sagittis non nisi. Proin fringilla risus eget rhoncus
+                                    | interdum.
+                                    | Maecenas enim ex, eleifend id arcu eget, egestas mollis est. Donec id ligula ex.
+                                    | Aenean id justo quis libero vulputate aliquet quis eu metus. In sit amet sodales turpis.
+                                    | Duis velit erat, placerat eget bibendum quis, volutpat vitae tellus.
+                                    | Nam varius suscipit eros sed vehicula. Nam et venenatis diam.
+                                    | Interdum et malesuada fames ac ante ipsum primis in faucibus.
+                                    | Fusce venenatis enim ut justo molestie, in vestibulum dolor varius.
+                        li
+                            img(src='public/images/3.jpg')
+                            .uk-overlay-panel.uk-overlay-background.uk-overlay-bottom
+                                h1 Function 2
+                                p
+                                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum felis ligula,
+                                    | auctor fermentum tempor id, sagittis non nisi. Proin fringilla risus eget rhoncus
+                                    | interdum.
+                                    | Maecenas enim ex, eleifend id arcu eget, egestas mollis est. Donec id ligula ex.
+                                    | Aenean id justo quis libero vulputate aliquet quis eu metus. In sit amet sodales turpis.
+                                    | Duis velit erat, placerat eget bibendum quis, volutpat vitae tellus.
+                                    | Nam varius suscipit eros sed vehicula. Nam et venenatis diam.
+                                    | Interdum et malesuada fames ac ante ipsum primis in faucibus.
+                                    | Fusce venenatis enim ut justo molestie, in vestibulum dolor varius.
+                        li
+                            img(src='public/images/4.jpg')
+                            .uk-overlay-panel.uk-overlay-background.uk-overlay-bottom
+                                h1 Function 3
+                                p
+                                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum felis ligula,
+                                    | auctor fermentum tempor id, sagittis non nisi. Proin fringilla risus eget rhoncus
+                                    | interdum.
+                                    | Maecenas enim ex, eleifend id arcu eget, egestas mollis est. Donec id ligula ex.
+                                    | Aenean id justo quis libero vulputate aliquet quis eu metus. In sit amet sodales turpis.
+                                    | Duis velit erat, placerat eget bibendum quis, volutpat vitae tellus.
+                                    | Nam varius suscipit eros sed vehicula. Nam et venenatis diam.
+                                    | Interdum et malesuada fames ac ante ipsum primis in faucibus.
+                                    | Fusce venenatis enim ut justo molestie, in vestibulum dolor varius.
+                    a.uk-slidenav.uk-slidenav-contrast.uk-slidenav-previous(href='', data-uk-slideshow-item='previous')
+                    a.uk-slidenav.uk-slidenav-contrast.uk-slidenav-next(href='', data-uk-slideshow-item='next')
+        .uk-grid(data-uk-grid-margin='')
+            .uk-width-medium-1-2
+                h1 Heading
+                p
+                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                    | dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                    | ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                    | fugiat nulla pariatur.
+                h2 Subheading
+                p
+                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                    | dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                    | ex ea commodo consequat.
+                //a.uk-button.uk-button-primary(href='#') Button
+            .uk-width-medium-1-2
+                img(width='660', height='400', src='data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNi4wLjQsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkViZW5lXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iNjYwcHgiIGhlaWdodD0iNDAwcHgiIHZpZXdCb3g9IjAgMCA2NjAgNDAwIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA2NjAgNDAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxyZWN0IGZpbGw9IiNGNUY1RjUiIHdpZHRoPSI2NjAiIGhlaWdodD0iNDAwIi8+DQo8ZyBvcGFjaXR5PSIwLjciPg0KCTxwYXRoIGZpbGw9IiNEOEQ4RDgiIGQ9Ik0yNTguMTg0LDE0My41djExM2gxNDMuNjMydi0xMTNIMjU4LjE4NHogTTM5MC4yNDQsMjQ0LjI0N0gyNzAuNDM3di04OC40OTRoMTE5LjgwOEwzOTAuMjQ0LDI0NC4yNDcNCgkJTDM5MC4yNDQsMjQ0LjI0N3oiLz4NCgk8cG9seWdvbiBmaWxsPSIjRDhEOEQ4IiBwb2ludHM9IjI3Ni44ODEsMjM0LjcxNyAzMDEuNTcyLDIwOC43NjQgMzEwLjgyNCwyMTIuNzY4IDM0MC4wMTYsMTgxLjY4OCAzNTEuNTA1LDE5NS40MzQgDQoJCTM1Ni42ODksMTkyLjMwMyAzODQuNzQ2LDIzNC43MTcgCSIvPg0KCTxjaXJjbGUgZmlsbD0iI0Q4RDhEOCIgY3g9IjMwNS40MDUiIGN5PSIxNzguMjU3IiByPSIxMC43ODciLz4NCjwvZz4NCjwvc3ZnPg0K', alt='')
 
-if(info)
-    .uk-alert.uk-alert-success.uk-text-center(data-uk-alert='')
-        p.uk-display-inline= info
-.uk-container.uk-container-center.uk-margin-top.uk-margin-large-bottom
-    .uk-grid(data-uk-grid-margin='')
-        .uk-container-center
-            .uk-slidenav-position(data-uk-slideshow='{autoplay:true}')
-                ul.uk-slideshow
-                    li
-                        img(src='public/images/2.jpg')
-                        .uk-overlay-panel.uk-overlay-background.uk-overlay-bottom
-                            h1 Function 1
-                            p
-                                | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum felis ligula,
-                                | auctor fermentum tempor id, sagittis non nisi. Proin fringilla risus eget rhoncus
-                                | interdum.
-                                | Maecenas enim ex, eleifend id arcu eget, egestas mollis est. Donec id ligula ex.
-                                | Aenean id justo quis libero vulputate aliquet quis eu metus. In sit amet sodales turpis.
-                                | Duis velit erat, placerat eget bibendum quis, volutpat vitae tellus.
-                                | Nam varius suscipit eros sed vehicula. Nam et venenatis diam.
-                                | Interdum et malesuada fames ac ante ipsum primis in faucibus.
-                                | Fusce venenatis enim ut justo molestie, in vestibulum dolor varius.
-                    li
-                        img(src='public/images/3.jpg')
-                        .uk-overlay-panel.uk-overlay-background.uk-overlay-bottom
-                            h1 Function 2
-                            p
-                                | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum felis ligula,
-                                | auctor fermentum tempor id, sagittis non nisi. Proin fringilla risus eget rhoncus
-                                | interdum.
-                                | Maecenas enim ex, eleifend id arcu eget, egestas mollis est. Donec id ligula ex.
-                                | Aenean id justo quis libero vulputate aliquet quis eu metus. In sit amet sodales turpis.
-                                | Duis velit erat, placerat eget bibendum quis, volutpat vitae tellus.
-                                | Nam varius suscipit eros sed vehicula. Nam et venenatis diam.
-                                | Interdum et malesuada fames ac ante ipsum primis in faucibus.
-                                | Fusce venenatis enim ut justo molestie, in vestibulum dolor varius.
-                    li
-                        img(src='public/images/4.jpg')
-                        .uk-overlay-panel.uk-overlay-background.uk-overlay-bottom
-                            h1 Function 3
-                            p
-                                | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum felis ligula,
-                                | auctor fermentum tempor id, sagittis non nisi. Proin fringilla risus eget rhoncus
-                                | interdum.
-                                | Maecenas enim ex, eleifend id arcu eget, egestas mollis est. Donec id ligula ex.
-                                | Aenean id justo quis libero vulputate aliquet quis eu metus. In sit amet sodales turpis.
-                                | Duis velit erat, placerat eget bibendum quis, volutpat vitae tellus.
-                                | Nam varius suscipit eros sed vehicula. Nam et venenatis diam.
-                                | Interdum et malesuada fames ac ante ipsum primis in faucibus.
-                                | Fusce venenatis enim ut justo molestie, in vestibulum dolor varius.
-                a.uk-slidenav.uk-slidenav-contrast.uk-slidenav-previous(href='', data-uk-slideshow-item='previous')
-                a.uk-slidenav.uk-slidenav-contrast.uk-slidenav-next(href='', data-uk-slideshow-item='next')
-    .uk-grid(data-uk-grid-margin='')
-        .uk-width-medium-1-2
-            h1 Heading
-            p
-                | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                | dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                | ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                | fugiat nulla pariatur.
-            h2 Subheading
-            p
-                | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                | dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                | ex ea commodo consequat.
-            //a.uk-button.uk-button-primary(href='#') Button
-        .uk-width-medium-1-2
-            img(width='660', height='400', src='data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNi4wLjQsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkViZW5lXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iNjYwcHgiIGhlaWdodD0iNDAwcHgiIHZpZXdCb3g9IjAgMCA2NjAgNDAwIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA2NjAgNDAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxyZWN0IGZpbGw9IiNGNUY1RjUiIHdpZHRoPSI2NjAiIGhlaWdodD0iNDAwIi8+DQo8ZyBvcGFjaXR5PSIwLjciPg0KCTxwYXRoIGZpbGw9IiNEOEQ4RDgiIGQ9Ik0yNTguMTg0LDE0My41djExM2gxNDMuNjMydi0xMTNIMjU4LjE4NHogTTM5MC4yNDQsMjQ0LjI0N0gyNzAuNDM3di04OC40OTRoMTE5LjgwOEwzOTAuMjQ0LDI0NC4yNDcNCgkJTDM5MC4yNDQsMjQ0LjI0N3oiLz4NCgk8cG9seWdvbiBmaWxsPSIjRDhEOEQ4IiBwb2ludHM9IjI3Ni44ODEsMjM0LjcxNyAzMDEuNTcyLDIwOC43NjQgMzEwLjgyNCwyMTIuNzY4IDM0MC4wMTYsMTgxLjY4OCAzNTEuNTA1LDE5NS40MzQgDQoJCTM1Ni42ODksMTkyLjMwMyAzODQuNzQ2LDIzNC43MTcgCSIvPg0KCTxjaXJjbGUgZmlsbD0iI0Q4RDhEOCIgY3g9IjMwNS40MDUiIGN5PSIxNzguMjU3IiByPSIxMC43ODciLz4NCjwvZz4NCjwvc3ZnPg0K', alt='')
-
-include ./footer
+    #my-id.uk-offcanvas
+        .uk-offcanvas-bar
+            ul.uk-nav.uk-nav-offcanvas.uk-nav-parent-icon(data-uk-nav='')
+                li.uk-active
+                    a(href='/') Homed
+                li
+                    a(href='game') Game
+                li
+                    a(href='signin') Sign In
+                li
+                    a(href='signup') Sign Up
+                li
+                    a(href='contact') Contact
+    .black.uk-contrast.uk-block-large.wrapper.uk-text-center
+        h1.uk-heading-large Ah! Zombies
+        div
+            a(href='') Home
+                |  |
+            a(href='') Game
+            |         |
+            a(href='') Contact

@@ -25,7 +25,7 @@ module.exports = function (app) {
     app.get('/', function (req, res) {
         var user = req.user;
         var info = req.info;
-        console.log(user);
+        // console.log(user);
         res.render('index', {user: user, info: info});
     });
 

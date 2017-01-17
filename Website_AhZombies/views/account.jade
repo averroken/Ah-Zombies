@@ -1,26 +1,50 @@
-include ./header
-.uk-container.uk-container-center.uk-margin-top.uk-margin-large-bottom
-    .my-container
-        .uk-panel.uk-panel-box.uk-width-1-2.uk-align-center
-            h3.uk-panel-title.uk-tab-center.uk-hidden Game details
+extends header
 
-            h3.uk-panel-title.uk-tab-center Account details
-            form.uk-form.uk-form-horizontal(role='form', action="/update", method="post")
-                .uk-form-row
-                    label.uk-form-label(for='form-input-name') Username
-                    .uk-form-controls
-                        input#form-input-name(type='text', required='', value=user.username, name='username').uk-width-1-1
-                .uk-form-row
-                    label.uk-form-label(for='form-input-email') Email
-                    .uk-form-controls
-                        input#form-input-email(type='email', required='', value=user.email, name='email').uk-width-1-1
-                        input#form-input-accountId(value=user.accountId).uk-hidden
-                .uk-form-row
-                    label.uk-form-label(for='form-input-password') Update password
-                    .uk-form-controls.uk-form-password
-                        input#form-input-password(type='password', placeholder='new password', name='password', disabled='').uk-width-1-1
-                        a.uk-display-block.uk-form-password-toggle.uk-margin-small-left.uk-margin-bottom-remove.uk-hidden(href='', data-uk-form-password='{lblShow: "Show", lblHide: "Hide"}') Show
-                a(href="/account").uk-button.uk-button-danger.uk-margin-top Cancel
-                button.uk-button.uk-button-primary.uk-margin-top.uk-align-right.uk-margin-bottom-remove(type='submit') Save
+block title
+    title Ah!Zombies | #{user.username}
 
-include ./footer
+block body
+    .uk-container.uk-container-center.uk-margin-top.uk-margin-large-bottom
+        .my-container
+            .uk-panel.uk-panel-box.uk-width-1-2.uk-align-center
+                h3.uk-panel-title.uk-tab-center.uk-hidden Game details
+
+                h3.uk-panel-title.uk-tab-center Account details
+                form.uk-form.uk-form-horizontal(role='form', action="/update", method="post")
+                    .uk-form-row
+                        label.uk-form-label(for='form-input-name') Username
+                        .uk-form-controls
+                            input#form-input-name(type='text', required='', value=user.username, name='username').uk-width-1-1
+                    .uk-form-row
+                        label.uk-form-label(for='form-input-email') Email
+                        .uk-form-controls
+                            input#form-input-email(type='email', required='', value=user.email, name='email').uk-width-1-1
+                            input#form-input-accountId(value=user.accountId).uk-hidden
+                    .uk-form-row
+                        label.uk-form-label(for='form-input-password') Update password
+                        .uk-form-controls.uk-form-password
+                            input#form-input-password(type='password', placeholder='new password', name='password', disabled='').uk-width-1-1
+                            a.uk-display-block.uk-form-password-toggle.uk-margin-small-left.uk-margin-bottom-remove.uk-hidden(href='', data-uk-form-password='{lblShow: "Show", lblHide: "Hide"}') Show
+                    a(href="/account").uk-button.uk-button-danger.uk-margin-top Cancel
+                    button.uk-button.uk-button-primary.uk-margin-top.uk-align-right.uk-margin-bottom-remove(type='submit') Save
+    #my-id.uk-offcanvas
+        .uk-offcanvas-bar
+            ul.uk-nav.uk-nav-offcanvas.uk-nav-parent-icon(data-uk-nav='')
+                li.uk-active
+                    a(href='/') Homed
+                li
+                    a(href='game') Game
+                li
+                    a(href='signin') Sign In
+                li
+                    a(href='signup') Sign Up
+                li
+                    a(href='contact') Contact
+    .black.uk-contrast.uk-block-large.wrapper.uk-text-center
+        h1.uk-heading-large Ah! Zombies
+        div
+            a(href='') Home
+                |  |
+            a(href='') Game
+            |         |
+            a(href='') Contact

@@ -1,4 +1,5 @@
 var TopDownGame = TopDownGame ||  {};
+var result;
 
 TopDownGame.room_1 = function() {};
 
@@ -16,7 +17,7 @@ TopDownGame.room_1.prototype = {
         this.count=0;
 
         // var result = this.findObjectsByType('playerStart', this.map, 'objectsLayer');
-        var result = this.findSpawnPoint('playerStart', this.map, 'objectsLayer', this.position);
+        result = this.findSpawnPoint('playerStart', this.map, 'objectsLayer', this.position);
 
         this.player = this.game.add.sprite(result[0].x, result[0].y, 'player');
         this.player.id = Player.Id;
