@@ -53,13 +53,8 @@ TopDownGame.room_1.prototype = {
         this.popup.fixedToCamera = true;
         this.popup.alpha = 0.8;
         this.popup.anchor.set(0.5);
-
-        var pw = (this.popup.width / 2) - 30;
-        var ph = (this.popup.height / 2) - 8;
-
-        this.closeButton = this.add.button(pw, -ph, 'close', this.closeWindow, this, 0, 0, 0, 0);
-
-        this.popup.addChild(this.closeButton);
+        this.popup.inputEnabled = true;
+        this.popup.events.onInputDown.add(this.closeWindow, this);
 
         this.popup.scale.set(0);
 
@@ -156,7 +151,6 @@ TopDownGame.room_1.prototype = {
         //  Create a tween that will pop-open the window, but only if it's not already tweening or open
         tween = this.game.add.tween(this.popup.scale).to( { x: 0.5, y: 0.5 }, 1000, Phaser.Easing.Elastic.Out, true);
         this.game.world.bringToTop(this.popup);
-        this.popup.visible = true;
     },
     closeWindow: function () {
         console.log("------------CLOSE----------");
