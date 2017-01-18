@@ -44,6 +44,9 @@ TopDownGame.Preload.prototype = {
         this.load.image('settingsButton', 'public/game/assets/images/settings.png');
         this.load.image('fullScreenButton', 'public/game/assets/images/fullscreen.png');
         this.load.image('joystickButton', 'public/game/assets/images/joystick.png');
+        this.load.image('button', 'public/game/assets/images/question-mark.png');
+        this.load.image('popup', 'public/game/assets/images/zombies_popup.png');
+        this.load.image('close', 'public/game/assets/images/orb-red.png');
     },
     create: function () {
         this.state.start('room_1');

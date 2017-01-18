@@ -4,6 +4,10 @@ var result;
 TopDownGame.room_1 = function () {
 };
 
+var button;
+var popup;
+var tween = null;
+
 TopDownGame.room_1.prototype = {
     create: function () {
         this.createMap();
@@ -44,6 +48,20 @@ TopDownGame.room_1.prototype = {
 
         this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
         // this.game.input.onDown.add(this.gofull, this);
+
+        this.popup = this.game.add.sprite(this.game.width-300,150,'popup');
+        this.popup.fixedToCamera = true;
+        this.popup.alpha = 0.8;
+        this.popup.anchor.set(0.5);
+
+        var pw = (this.popup.width / 2) - 30;
+        var ph = (this.popup.height / 2) - 8;
+
+        this.closeButton = this.add.button(pw, -ph, 'close', this.closeWindow, this, 0, 0, 0, 0);
+
+        this.popup.addChild(this.closeButton);
+
+        this.popup.scale.set(0);
 
         this.createItems();
         this.createDoors();
@@ -115,11 +133,39 @@ TopDownGame.room_1.prototype = {
     },
     addButtons: function () {
         this.buttons = this.game.add.group();
+
         this.fullScreenButton = this.add.button(this.game.width - 25, 5, 'fullScreenButton', this.gofull, this, 0, 0, 0, 0, this.buttons);
         this.fullScreenButton.fixedToCamera = true;
+
         this.joystickButton = this.add.button(this.game.width - 25, 30, 'joystickButton', this.enableJoysticks, this, 0, 0, 0, 0, this.buttons);
         this.joystickButton.fixedToCamera = true;
+
+        this.joystickButton = this.add.button(this.game.width - 25, 60, 'button', this.openWindow, this, 0, 0, 0, 0, this.buttons);
+        this.joystickButton.fixedToCamera = true;
+
         this.game.world.bringToTop(this.buttons);
+    },
+    openWindow: function () {
+        console.log("Hallo popup");
+        if ((tween !== null && tween.isRunning) || this.popup.scale.x === 1)
+        {
+            //this.game.backgroundOpacity = 0.7;
+            return;
+        }
+
+        //  Create a tween that will pop-open the window, but only if it's not already tweening or open
+        tween = this.game.add.tween(this.popup.scale).to( { x: 0.5, y: 0.5 }, 1000, Phaser.Easing.Elastic.Out, true);
+        this.game.world.bringToTop(this.popup);
+        this.popup.visible = true;
+    },
+    closeWindow: function () {
+        console.log("------------CLOSE----------");
+        if (tween && tween.isRunning || this.popup.scale.x === 0.1)
+        {
+            return;
+        }
+        //  Create a tween that will close the window, but only if it's not already tweening or closed
+        tween = this.game.add.tween(this.popup.scale).to( { x: 0, y: 0}, 500, Phaser.Easing.Elastic.In, true);
     },
     findSpawnPoint: function (type, map, layer, spawnPosition) {
         var result = new Array();

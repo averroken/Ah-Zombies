@@ -33,9 +33,11 @@ module.exports = function (app) {
         res.render('index');
     });
 
-    app.get('/game', isAuthenticated, function (req, res) {
+    app.get('/game', function (req, res) {
         res.render('game', {
-            user: req.user
+            user: {
+                username: "Antoon"
+            }
         });
     });
 
