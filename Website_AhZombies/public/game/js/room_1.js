@@ -175,7 +175,7 @@ TopDownGame.room_1.prototype = {
         console.log('targetTileMap: ' + targetRoom[0]);
         console.log('targetSpawnPoint: ' + targetRoom[1]);
 
-        // TopDownGame.game.state.states[targetRoom[0]].position = targetRoom[1];
+        TopDownGame.game.state.states[targetRoom[0]].position = targetRoom[1];
         TopDownGame.game.state.start(targetRoom[0]);
     },
     killBullet: function(bullet){
@@ -211,7 +211,6 @@ TopDownGame.room_1.prototype = {
 
         this.player.rotation = this.physics.arcade.angleToPointer(this.player);
 
-        console.log(this.player.rotation);
         if (this.input.activePointer.isDown || this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
             this.player.frame = 0;
             this.weapon.fire();

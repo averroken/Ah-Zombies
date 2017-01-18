@@ -3,9 +3,9 @@
  */
 var TopDownGame = TopDownGame || {};
 
-TopDownGame.Menu = function () {};
+TopDownGame.Menu2 = function () {};
 
-TopDownGame.Menu.prototype = {
+TopDownGame.Menu2.prototype = {
     create: function () {
 
         // To exit the how-to or credits menu, I can press any button. This is to stop that same button press from
@@ -15,7 +15,7 @@ TopDownGame.Menu.prototype = {
 
         background = this.add.tileSprite(0, 0, 800, 600, "background");
 
-        this.gameTitle = TopDownGame.game.add.image(TopDownGame.game.width / 2, TopDownGame.game.height / 2 - 120, 'menu_title');
+        this.gameTitle = TopDownGame.game.add.image(TopDownGame.game.width / 2, TopDownGame.game.height / 2 - 120, 'retry_title');
         this.gameTitle.anchor.setTo(0.5, 0.5);
 
         this.buttons = [];
@@ -27,7 +27,7 @@ TopDownGame.Menu.prototype = {
             3: 160
         };
         this.buttonSettings = [
-            {key: 'play_button', yOffset: -40, callback: this.levelSelect},
+            {key: 'retry_button', yOffset: -40, callback: this.levelSelect},
             {key: 'how_to_button', yOffset: 60, callback: this.showHowTo}];
 
         this.buttonSettings.forEach(function(button) {

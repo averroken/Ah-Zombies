@@ -45,7 +45,9 @@ TopDownGame.Preload.prototype = {
         this.load.image('background', 'public/game/assets/background.jpg');
 
         this.load.image('menu_title', 'public/game/assets/menu/title.png');
+        this.load.image('retry_title', 'public/game/assets/menu/retry_title.png');
         this.load.image('play_button', 'public/game/assets/menu/play_button.png');
+        this.load.image('retry_button', 'public/game/assets/menu/retry_button.png');
         this.load.image('how_to_button', 'public/game/assets/menu/how_to_button.png');
         this.load.image('credits_button', 'public/game/assets/menu/credits_button.png');
         this.load.image('city', 'public/game/assets/menu/landscape.png');
