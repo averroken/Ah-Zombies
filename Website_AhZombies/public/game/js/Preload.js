@@ -40,6 +40,7 @@ TopDownGame.Preload.prototype = {
         this.load.image('cute_lpc_chest', 'public/game/assets/images/cute_lpc_chest.png');
         this.load.image('popup', 'public/game/assets/images/controls_pc.png');
         this.load.image('close', 'public/game/assets/images/orb-red.png');
+        this.load.image('button', 'public/game/assets/images/button_sprite_sheet.png');
     },
     create: function () {
         this.state.start('room_1');
