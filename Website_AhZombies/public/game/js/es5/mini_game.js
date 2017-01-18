@@ -23,8 +23,7 @@ TopDownGame.mini_game = function () {};
 
 TopDownGame.mini_game.prototype = {
     create: function create() {
-        background = this.game.add.tileSprite(0, 0, 1920, 1080, "background");
-        if (!this.position) this.position = "down";
+        background = game.add.tileSprite(0, 0, 1920, 1080, "background");
 
         // enemy = game.add.sprite(Math.floor((Math.random()*300)+200),Math.floor((Math.random()*300)+200), 'enemy');
         //     var walk = enemy.animations.add('walk', [40, 41, 42, 43, 44, 45, 46], 10, true);

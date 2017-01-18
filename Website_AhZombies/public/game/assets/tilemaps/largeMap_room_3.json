@@ -305,6 +305,106 @@
                  "width":32,
                  "x":424.666666666667,
                  "y":487.333333333333
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":41,
+                 "name":"ZombieSpawn5",
+                 "properties":
+                    {
+                     "type":"zombieSpawn5"
+                    },
+                 "propertytypes":
+                    {
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":462.614235284459,
+                 "y":431.418110171579
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":42,
+                 "name":"ZombieSpawn4",
+                 "properties":
+                    {
+                     "type":"ZombieSpawn4"
+                    },
+                 "propertytypes":
+                    {
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":479.033248501765,
+                 "y":516.796978901568
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":43,
+                 "name":"ZombieSpawn3",
+                 "properties":
+                    {
+                     "type":"ZombieSpawn3"
+                    },
+                 "propertytypes":
+                    {
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":566.054018553485,
+                 "y":431.418110171579
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":44,
+                 "name":"ZombieSpawn2",
+                 "properties":
+                    {
+                     "type":"ZombieSpawn2"
+                    },
+                 "propertytypes":
+                    {
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":584.114933092521,
+                 "y":503.661768327724
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":45,
+                 "name":"ZombieSpawn1",
+                 "properties":
+                    {
+                     "type":"ZombieSpawn1"
+                    },
+                 "propertytypes":
+                    {
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":726.96034808308,
+                 "y":463.435185945325
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -313,7 +413,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":41,
+ "nextobjectid":46,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,

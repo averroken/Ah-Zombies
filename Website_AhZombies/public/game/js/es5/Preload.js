@@ -39,6 +39,8 @@ TopDownGame.Preload.prototype = {
         this.load.image('cute_lpc_doors_y_right', 'public/game/assets/images/cute_lpc_doors_y_right.png');
         this.load.image('cute_lpc_doors_y_left', 'public/game/assets/images/cute_lpc_doors_y_left.png');
         this.load.image('cute_lpc_chest', 'public/game/assets/images/cute_lpc_chest.png');
+
+        this.load.spritesheet('gamepad', 'public/game/assets/images/gamepad_spritesheet.png', 100, 100);
     },
     create: function create() {
         this.state.start('room_1');

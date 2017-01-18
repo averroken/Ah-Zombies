@@ -48,6 +48,7 @@ TopDownGame.room_1.prototype = {
 
         this.createItems();
         this.createDoors();
+        this.addGamePad();
     },
     gofull: function gofull() {
         if (this.game.scale.isFullScreen) {
@@ -86,6 +87,16 @@ TopDownGame.room_1.prototype = {
         result.forEach(function (element) {
             this.createFromTiledObject(element, this.doors);
         }, this);
+    },
+    addGamePad: function addGamePad() {
+        // Add the VirtualGamepad plugin to the game
+        this.gamepad = this.game.plugins.add(Phaser.Plugin.VirtualGamepad);
+
+        // Add a joystick to the game (only one is allowed right now)
+        this.joystick = this.gamepad.addJoystick(300, 800, 1.2, 'gamepad');
+
+        // Add a button to the game (only one is allowed right now)
+        this.button = this.gamepad.addButton(400, 420, 1.0, 'gamepad');
     },
     findSpawnPoint: function findSpawnPoint(type, map, layer, spawnPosition) {
         var result = new Array();
@@ -158,11 +169,12 @@ TopDownGame.room_1.prototype = {
         console.log('targetTileMap: ' + targetRoom[0]);
         console.log('targetSpawnPoint: ' + targetRoom[1]);
 
-        if (targetRoom[0] !== "mini_game") TopDownGame.game.state.states[targetRoom[0]].position = targetRoom[1];
+        TopDownGame.game.state.states[targetRoom[0]].position = targetRoom[1];
         TopDownGame.game.state.start(targetRoom[0]);
     },
     update: function update() {
         // console.log(this.count);
+        this.logJoystick();
         var boolMoved = false;
         this.player.body.velocity.y = 0;
         this.player.body.velocity.x = 0;
@@ -197,5 +209,11 @@ TopDownGame.room_1.prototype = {
                 });
             }
         }
+    },
+    logJoystick: function logJoystick() {
+        if (this.joystick.properties.up) console.log("JOYSTICK: up");
+        if (this.joystick.properties.down) console.log("JOYSTICK: down");
+        if (this.joystick.properties.left) console.log("JOYSTICK: left");
+        if (this.joystick.properties.right) console.log("JOYSTICK: right");
     }
 };
