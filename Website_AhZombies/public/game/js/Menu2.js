@@ -115,6 +115,7 @@ TopDownGame.Menu2.prototype = {
     addButton: function (key, yOffset, callback) {
         var button = TopDownGame.game.add.image(TopDownGame.game.camera.width / 2, TopDownGame.game.camera.height / 2 + yOffset, key);
         button.events.onInputDown.add(callback, this);
+        button.inputEnabled = true;
         button.anchor.setTo(.5, .5);
         button.scale.x = .5;
         button.scale.y = .5;

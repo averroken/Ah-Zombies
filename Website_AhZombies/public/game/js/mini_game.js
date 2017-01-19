@@ -6,13 +6,14 @@ var wave = 0;
 var background;
 var firebutton;
 var button;
-var score
+var score;
 var enemiesKilled;
 var game = TopDownGame.game;
 
 TopDownGame.mini_game = function() {};
 
 TopDownGame.mini_game.prototype = {
+    //Create function
     create: function() {
 
         background = this.add.tileSprite(0, 0, 600, 300, "background");
@@ -65,6 +66,7 @@ TopDownGame.mini_game.prototype = {
         this.addButtons();
         // }
     },
+    //Enemy vs Player damage
     enemiesDamage: function(){
       this.health -= 1;
       this.healthBar.text = "Health: " + Math.round((this.health * 0.033333));
@@ -78,6 +80,7 @@ TopDownGame.mini_game.prototype = {
       }
       return false;
     },
+    //Spawn the enemies & wave control
     spawnEnemies: function(){
         this.enemies = this.add.physicsGroup(Phaser.Physics.ARCADE);
         //this.enemies.physicsBodyType = Phaser.Physics.ARCADE;
@@ -128,6 +131,7 @@ TopDownGame.mini_game.prototype = {
         this.enemies.callAll('animations.play','animations','walk');
 
     },
+    //Update Function
     update: function() {
 
         //Collisions

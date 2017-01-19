@@ -15,7 +15,11 @@ TopDownGame.room_1.prototype = {
         this.backgroundlayer.resizeWorld();
 
         this.count = 0;
-
+        this.healthBar = this.add.text(this.game.width - 150,5,"Health: 100",
+            { font: "20px Arial", fill: "#ffffff", align: "center" });
+        this.healthBar.fixedToCamera = true;
+        this.healthBar.inputEnabled = true;
+        this.health = 3000;
         // var result = this.findObjectsByType('playerStart', this.map, 'objectsLayer');
         result = this.findSpawnPoint('playerStart', this.map, 'objectsLayer', this.position);
 
@@ -71,6 +75,19 @@ TopDownGame.room_1.prototype = {
         this.gamepad.joystickPad.visible = (!this.gamepad.joystickPad.visible);
         // console.log(this.joystick);
         // console.log(this.gamepad);
+    },
+    enemiesDamage: function(){
+        this.health -= 1;
+        this.healthBar.text = "Health: " + Math.round((this.health * 0.033333));
+        if(this.health <= 0){
+            console.log("PLAYER DIED");
+            this.alive = false;
+            this.player.kill();
+            enemiesKilled = 0;
+            this.state.start("Menu2");
+            return true;
+        }
+        return false;
     },
     addGamePad: function () {
         // console.log("gamepad added");
