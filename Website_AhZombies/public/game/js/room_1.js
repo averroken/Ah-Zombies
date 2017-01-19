@@ -109,8 +109,10 @@ TopDownGame.room_1.prototype = {
         // Add a button to the game (only one is allowed right now)
         this.button = this.gamepad.addButton(this.game.width - 50, this.game.height - 50, 0.5, 'gamepad');
 
-        this.joystick.enabled = true;
-
+        this.joystick.enabled = false;
+        this.joystick.visible =  false;
+        this.button.visible =  false;
+        this.gamepad.joystickPad.visible = false;
         // console.log(this.joystick);
     },
     addButtons: function () {
@@ -155,7 +157,7 @@ TopDownGame.room_1.prototype = {
                 result.push(element);
             }
         });
-        return result;s
+        return result;
     },
     createFromTiledObject: function (element, group) {
         var sprite = group.create(element.x, element.y, element.properties.sprite);

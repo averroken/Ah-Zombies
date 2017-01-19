@@ -23,11 +23,11 @@ TopDownGame.room_1.prototype = {
 
         this.player = this.game.add.sprite(result[0].x, result[0].y, 'player');
         this.player.id = Player.Id;
-        console.log("My id: " + Player.Id);
+        // console.log("My id: " + Player.Id);
 
         socket.emit('getPlayers');
 
-        console.log(Player.Map);
+        // console.log(Player.Map);
 
         socket.emit("moveMyPlayer", {
             id: this.player.id,
@@ -43,12 +43,13 @@ TopDownGame.room_1.prototype = {
 
         this.cursors = this.game.input.keyboard.createCursorKeys();
 
-        this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
-        this.game.input.onDown.add(this.gofull, this);
+        this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+        // this.game.input.onDown.add(this.gofull, this);
 
         this.createItems();
         this.createDoors();
         this.addGamePad();
+        this.addButtons();
     },
     gofull: function gofull() {
         if (this.game.scale.isFullScreen) {
@@ -56,6 +57,14 @@ TopDownGame.room_1.prototype = {
         } else {
             this.game.scale.startFullScreen(false);
         }
+    },
+    enableJoysticks: function enableJoysticks() {
+        this.joystick.enabled = !this.joystick.enabled;
+        this.joystick.visible = !this.joystick.visible;
+        this.button.visible = !this.button.visible;
+        this.gamepad.joystickPad.visible = !this.gamepad.joystickPad.visible;
+        // console.log(this.joystick);
+        // console.log(this.gamepad);
     },
     createMap: function createMap() {
         this.map = this.game.add.tilemap('room_1');
@@ -66,18 +75,18 @@ TopDownGame.room_1.prototype = {
         this.items = this.game.add.group();
         this.items.enableBody = true;
         var item;
-        console.log(items.length);
+        // console.log(items.length);
         if (!(items.length >= 0)) {
-            console.log("length new: :" + items.length);
+            // console.log("length new: :" + items.length);
             result = this.findObjectsByType('item', this.map, 'objectsLayer');
             items = result;
             socket.emit("setItemList", items, this.map.key);
         } else console.log(items.length);
-        console.log(this.items.length);
+        // console.log(this.items.length);
         items.forEach(function (element) {
             this.createFromTiledObject(element, this.items);
         }, this);
-        console.log(this.items.length);
+        // console.log(this.items.length);
     },
     createDoors: function createDoors() {
         this.doors = this.game.add.group();
@@ -89,14 +98,29 @@ TopDownGame.room_1.prototype = {
         }, this);
     },
     addGamePad: function addGamePad() {
+        // console.log("gamepad added");
         // Add the VirtualGamepad plugin to the game
         this.gamepad = this.game.plugins.add(Phaser.Plugin.VirtualGamepad);
 
         // Add a joystick to the game (only one is allowed right now)
-        this.joystick = this.gamepad.addJoystick(300, 800, 1.2, 'gamepad');
+        this.joystick = this.gamepad.addJoystick(50, this.game.height - 50, 0.5, 'gamepad');
 
         // Add a button to the game (only one is allowed right now)
-        this.button = this.gamepad.addButton(400, 420, 1.0, 'gamepad');
+        this.button = this.gamepad.addButton(this.game.width - 50, this.game.height - 50, 0.5, 'gamepad');
+
+        this.joystick.enabled = false;
+        this.joystick.visible = false;
+        this.button.visible = false;
+        this.gamepad.joystickPad.visible = false;
+        // console.log(this.joystick);
+    },
+    addButtons: function addButtons() {
+        this.buttons = this.game.add.group();
+        this.fullScreenButton = this.add.button(this.game.width - 25, 5, 'fullScreenButton', this.gofull, this, 0, 0, 0, 0, this.buttons);
+        this.fullScreenButton.fixedToCamera = true;
+        this.joystickButton = this.add.button(this.game.width - 25, 30, 'joystickButton', this.enableJoysticks, this, 0, 0, 0, 0, this.buttons);
+        this.joystickButton.fixedToCamera = true;
+        this.game.world.bringToTop(this.buttons);
     },
     findSpawnPoint: function findSpawnPoint(type, map, layer, spawnPosition) {
         var result = new Array();
@@ -107,9 +131,9 @@ TopDownGame.room_1.prototype = {
                 offset = element.properties.offset;
             }
             if (element.properties.spawnPoint === spawnPosition) {
-                console.log("-------> spawn point found");
+                // console.log("-------> spawn point found")
             } else {
-                console.log("-------> spawn NOT point found --------------");
+                // console.log("-------> spawn NOT point found --------------");
                 return;
             }
             if (element.properties.type === type) {
@@ -164,7 +188,7 @@ TopDownGame.room_1.prototype = {
         console.log('entering the door');
         console.log('targetTileMap: ' + targetRoom[0]);
         socket.emit('changeMap', targetRoom[0], Player.Id);
-        TopDownGame.game.state.start(targetRoom[0]);
+        // TopDownGame.game.state.start(targetRoom[0]);
         console.log('entering the door');
         console.log('targetTileMap: ' + targetRoom[0]);
         console.log('targetSpawnPoint: ' + targetRoom[1]);
@@ -174,8 +198,8 @@ TopDownGame.room_1.prototype = {
     },
     update: function update() {
         // console.log(this.count);
-        this.logJoystick();
         var boolMoved = false;
+        if (this.joystick.enabled) this.logJoystick();
         this.player.body.velocity.y = 0;
         this.player.body.velocity.x = 0;
 
@@ -211,9 +235,29 @@ TopDownGame.room_1.prototype = {
         }
     },
     logJoystick: function logJoystick() {
-        if (this.joystick.properties.up) console.log("JOYSTICK: up");
-        if (this.joystick.properties.down) console.log("JOYSTICK: down");
-        if (this.joystick.properties.left) console.log("JOYSTICK: left");
-        if (this.joystick.properties.right) console.log("JOYSTICK: right");
+        if (this.joystick.properties.up) {
+            this.cursors.up.isDown = true;
+            // console.log("JOYSTICK: up");
+        } else {
+            this.cursors.up.isDown = false;
+        }
+        if (this.joystick.properties.down) {
+            this.cursors.down.isDown = true;
+            // console.log("JOYSTICK: down");
+        } else {
+            this.cursors.down.isDown = false;
+        }
+        if (this.joystick.properties.right) {
+            this.cursors.right.isDown = true;
+            // console.log("JOYSTICK: right");
+        } else {
+            this.cursors.right.isDown = false;
+        }
+        if (this.joystick.properties.left) {
+            this.cursors.left.isDown = true;
+            // console.log("JOYSTICK: left");
+        } else {
+            this.cursors.left.isDown = false;
+        }
     }
 };
