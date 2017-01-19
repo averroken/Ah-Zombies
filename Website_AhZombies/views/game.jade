@@ -9,6 +9,7 @@ head
     script(src='public/js/uikit.min.js', defer='')
     script(src='public/js/components/form-password.min.js')
     script(type='text/javascript', src='public/game/js/min/phaser.js')
+    script(type='text/javascript', src='public/game/js/min/phaser-plugin-virtual-gamepad.js')
     script(type='text/javascript', src='public/game/js/Boot.js')
     script(type='text/javascript', src='public/game/js/Preload.js')
     script(type='text/javascript', src='public/game/js/room_1.js')
@@ -53,17 +54,17 @@ script(type='text/javascript').
     socket.on('setNewMap', function(ITEM_LIST_ROOM1){
         items=ITEM_LIST_ROOM1;
         Player.Map="room_1";
-        console.log("New: :" + items.length);
+        //console.log("New: :" + items.length);
     });
 
     socket.on("setMap", function (ITEM_LIST_ROOM, room) {
-        console.log(ITEM_LIST_ROOM.length);
+        //console.log(ITEM_LIST_ROOM.length);
         items=ITEM_LIST_ROOM;
         Player.Map=room;
-        console.log(Player.Map);
+        //console.log(Player.Map);
     });
     socket.on('yourId', function(id) {
-    console.log(id);
+    //console.log(id);
     Player.Id=id;
     });
 
@@ -100,8 +101,8 @@ script(type='text/javascript').
         });
 
     socket.on('updateItems',function(ITEM_LIST ,room) {
-    console.log(Player.Map);
-        console.log(room);
+    //console.log(Player.Map);
+        //console.log(room);
         if(Player.Map == room) {
             items = ITEM_LIST;
             TopDownGame.game.state.states[room].items.destroy();
@@ -110,41 +111,41 @@ script(type='text/javascript').
     });
 
     socket.on("removePlayer", function(id){
-    console.log(id);
+    //console.log(id);
         if (Object.keys(players).length > 0) {
             for (var i = Object.keys(players.children).length - 1; i >= 0; i--) {
                 if (players.children[i].id == id) {
-                    console.log("removePlayer: "+Object.keys(players.children).length );
+                    //console.log("removePlayer: "+Object.keys(players.children).length );
                     players.children[i].kill();
-                console.log("removedPlayer: "+Object.keys(players.children).length );
+                //console.log("removedPlayer: "+Object.keys(players.children).length );
                 }
             }
         }
     if (players[id]) {
         players[id].kill();
     }
-    console.log(players);
+    //console.log(players);
     });
 
     socket.on('sendPlayersAndEnemies', function(PLAYER_LIST, ENEMY_LIST) {
-                console.log("PLAYERLIST"+PLAYER_LIST);
+                //console.log("PLAYERLIST"+PLAYER_LIST);
                 showOtherPlayers(PLAYER_LIST);
                 showEnemies(ENEMY_LIST);
             }
      );
 
     socket.on('newPlayer', function(newplayer) {
-        console.log(Player.Map);
-        console.log(newplayer.map);
+        //console.log(Player.Map);
+        //console.log(newplayer.map);
         removePlayer(newplayer);
         if (Player.Id != newplayer.id && !players[newplayer.id] && newplayer.x !== undefined && newplayer.map==Player.Map) {
 
-        console.log("NEW PLAYER");
-        console.log(newplayer);
+        //console.log("NEW PLAYER");
+        //console.log(newplayer);
 
         // adding player
-        console.log("x: " + newplayer.x);
-        console.log("y: " + newplayer.y);
+        //console.log("x: " + newplayer.x);
+        //console.log("y: " + newplayer.y);
         var player = TopDownGame.game.add.sprite(50, 270, 'player');
 
         //enable physics on player
@@ -169,10 +170,10 @@ script(type='text/javascript').
         });
 
     socket.on('newEnemy', function (newEnemy) {
-        console.log(Player.Map);
-        console.log(newEnemy.map);
+        //console.log(Player.Map);
+        //console.log(newEnemy.map);
         
-        console.log(newEnemy);
+        //console.log(newEnemy);
 
         addNewEnemy(newEnemy);
     });
@@ -182,7 +183,7 @@ script(type='text/javascript').
             if (Object.keys(players).length > 0) {
                 for (var i = Object.keys(players.children).length - 1; i >= 0; i--) {
                     if (players.children[i].id == newPlayer.id) {
-                        console.log("REMOVE PLAYER");
+                        //console.log("REMOVE PLAYER");
                         //players.remove(newPlayer);
                         players.children[i].kill();
                     }
@@ -193,18 +194,19 @@ script(type='text/javascript').
 
     function addNewEnemy(newEnemy){
         if (newEnemy.map == Player.Map) {
-            console.log("NEW ENEMY");
+            //console.log("NEW ENEMY");
 
             let random = Math.floor(Math.random() * 5) + 1;
             let zombieStart = "zombieSpawn" + random;
             let enemySpawn = findSpawnPoint(zombieStart, null, 'objectsLayer');
-            console.log("SPAWN: "+enemySpawn);
-            let enemy = TopDownGame.game.add.sprite(enemySpawn[0].x, enemySpawn[0].y, 'player');
+            //console.log("SPAWN: "+enemySpawn);
+            let enemy = TopDownGame.game.add.sprite(enemySpawn[0].x, enemySpawn[0].y, 'enemyCoop');
             enemy.enableBody=true;
-            console.log(enemy);
-            console.log(newEnemy);
+            enemy.anchor.setTo(0.5);
+            //console.log(enemy);
+            //console.log(newEnemy);
 
-            console.log(TopDownGame.game);
+            //console.log(TopDownGame.game);
 
             //enable physics on player
             //TopDownGame.game.physics.arcade.enable(enemy);
@@ -222,10 +224,10 @@ script(type='text/javascript').
             enemy.map = newEnemy.map;
 
             //enemies[enemy.id] = enemy;
-            console.log(enemy)
+            //console.log(enemy)
             enemies.add(enemy);
-            console.log(enemy.id);
-            console.log(enemy);
+            //console.log(enemy.id);
+            //console.log(enemy);
             socket.emit("setEnemyLocation", {
                 id: enemy.id,
                 x: enemy.x,
@@ -239,9 +241,9 @@ script(type='text/javascript').
         map = TopDownGame.game.state.callbackContext.map;
         var result = new Array();
         if (result.length < 0) return;
-        console.log(map);
+        //console.log(map);
         map.objects[layer].forEach(function (element) {
-            console.log(element);
+            //console.log(element);
             var offset = 0;
             if (element.properties.offset != undefined) {
                 offset = element.properties.offset;
@@ -252,7 +254,7 @@ script(type='text/javascript').
                 result.push(element);
             }
         });
-        console.log(result);
+        //console.log(result);
         return result;
     }
 
@@ -273,9 +275,9 @@ script(type='text/javascript').
     //    });
 
         socket.on('movePlayerByOtherPlayers', function (player) {
-            console.log(players);
-            console.log(player.id);
-            console.log(player.x);
+            //console.log(players);
+            //console.log(player.id);
+            //console.log(player.x);
             if (Player.Map == player.map) {
                 if (Object.keys(players).length > 0) {
                     for (var i = Object.keys(players.children).length - 1; i >= 0; i--) {
@@ -294,14 +296,14 @@ script(type='text/javascript').
         players.enableBody = true;
         players.physicsBodyType = Phaser.Physics.ARCADE;
 
-        console.log(PLAYER_LIST);
+        //console.log(PLAYER_LIST);
         for (var id in PLAYER_LIST) {
-            console.log(PLAYER_LIST[id]);
-            console.log(Player.Map);
+            //console.log(PLAYER_LIST[id]);
+            //console.log(Player.Map);
             if (Player.Id != id && Player.Map==PLAYER_LIST[id].map) {
                 var element = PLAYER_LIST[id];
-                console.log('PLAYER ADDED');
-                console.log(element);
+                //console.log('PLAYER ADDED');
+                //console.log(element);
 
                 // adding player
                 let player = TopDownGame.game.add.sprite(50, 270, 'player');
@@ -315,10 +317,10 @@ script(type='text/javascript').
                 player.y = element.y;
                 player.map = element.map;
 
-                console.log(player);
+                //console.log(player);
 
                 players.add(player);
-                console.log(players);
+                //console.log(players);
             }
         }
     }
@@ -330,8 +332,8 @@ script(type='text/javascript').
         //enable physics on player
         //TopDownGame.game.physics.arcade.enable(enemies);
 
-        console.log(TopDownGame.game);
-        console.log(enemies);
+        //console.log(TopDownGame.game);
+        //console.log(enemies);
 
 
 
@@ -346,10 +348,10 @@ script(type='text/javascript').
                 console.log(element);
                 if (element.x == 0 && element.y == 0) addNewEnemy(element);
                 else {
-                    console.log('ENEMY ADDED');
+                    //console.log('ENEMY ADDED');
                     //console.log(element);
 
-                    let enemy = TopDownGame.game.add.sprite(element.x, element.y, 'player');
+                    let enemy = TopDownGame.game.add.sprite(element.x, element.y, 'enemyCoop');
 
                     //TopDownGame.game.physics.enable(enemy, Phaser.Physics.ARCADE);
 
@@ -367,10 +369,10 @@ script(type='text/javascript').
                     enemy.x = element.x;
                     enemy.y = element.y;
                     enemy.map = element.map;
-                    console.log(element);
-                    console.log(enemy.id);
+                    //console.log(element);
+                    //console.log(enemy.id);
                     enemies.add(enemy);
-                    console.log(enemies);
+                    //console.log(enemies);
                 }
             }
         }

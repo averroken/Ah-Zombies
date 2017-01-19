@@ -61,7 +61,7 @@ TopDownGame.room_1.prototype = {
 
         this.createItems();
         this.createDoors();
-//        this.addGamePad();
+        this.addGamePad();
         this.addButtons();
     },
     enableJoysticks: function () {
@@ -203,6 +203,7 @@ TopDownGame.room_1.prototype = {
       let targetRoom = door.targetTileMap.split('|');
         console.log('entering the door');
         console.log('targetTileMap: ' + targetRoom[0]);
+        console.log(targetRoom);
         socket.emit('changeMap', targetRoom[0], Player.Id);
         Player.Map=targetRoom[0];
         TopDownGame.game.state.start(targetRoom[0]);
@@ -223,9 +224,9 @@ TopDownGame.room_1.prototype = {
         this.game.physics.arcade.overlap(this.player, this.doors, this.enterDoor, null, this);
         this.player.body.velocity.y = 0;
         this.player.body.velocity.x = 0;
-//        if (!this.joystick.enabled) {
+        var boolMoved = false;
+        if (!this.joystick.enabled) {
             // console.log(this.count);
-            var boolMoved = false;
 
             if (this.cursors.up.isDown) {
                 this.player.animations.play('walk');
@@ -256,68 +257,73 @@ TopDownGame.room_1.prototype = {
 
                 this.weapon.fire();
             }
-            if (boolMoved) {
-                this.count++;
-                if (this.count % 2 == 0) {
-                    // console.log(this.count);
-                    socket.emit("moveMyPlayer", {
-                        id: this.player.id,
-                        x: this.player.x,
-                        y: this.player.y,
-                        map: Player.Map
-                    });
+        } else {
+
+            //console.log(this.joystick.properties.angle);
+            this.joystickangle = this.joystick.properties.rotation;
+            if (this.joystickangle != 0) {
+                this.player.rotation = this.joystick.properties.rotation;
+            }
+            if (this.button.isDown) {
+                this.boolShooting = true;
+                this.player.frame = 0;
+                this.weapon.fire();
+            } else {
+                this.boolShooting = false;
+            }
+            if (this.joystick.properties.up) {
+                this.player.animations.play('walk');
+                this.cursors.up.isDown = true;
+                boolMoved = true;
+                this.player.body.velocity.y -= this.player.velocity;
+            }
+            else {
+                this.player.body.velocity.y -= 0;
+            }
+            if (this.joystick.properties.down) {
+                this.cursors.down.isDown = true;
+                this.player.animations.play('walk');
+                boolMoved = true;
+                this.player.body.velocity.y += this.player.velocity;
+            }
+            else {
+                this.player.body.velocity.y += 0;
+            }
+            if (this.joystick.properties.right) {
+                this.cursors.right.isDown = true;
+                boolMoved = true;
+                this.player.body.velocity.x += this.player.velocity;
+                this.player.animations.play('walk');
+            }
+            else {
+                this.player.body.velocity.x += 0;
+            }
+            if (this.joystick.properties.left) {
+                this.cursors.left.isDown = true;
+                boolMoved = true;
+                this.player.body.velocity.x -= this.player.velocity;
+                this.player.animations.play('walk');
+            } else {
+                this.player.body.velocity.x -= 0;
+            }
+            if (!this.joystick.properties.inUse) {
+                if (!this.boolShooting) {
+                    this.player.animations.stop();
+                    this.player.frame = 3;
                 }
             }
-//        } else {
-//            console.log(this.joystick.properties.angle);
-//            this.joystickangle = this.joystick.properties.rotation;
-//            if (this.joystickangle != 0) {
-//                this.player.rotation = this.joystick.properties.rotation;
-//            }
-//            if (this.button.isDown){
-//                this.boolShooting = true;
-//                this.player.frame = 0;
-//                this.weapon.fire();
-//            } else {
-//                this.boolShooting = false;
-//            }
-//            if (this.joystick.properties.up) {
-//                this.player.animations.play('walk');
-//                this.cursors.up.isDown = true;
-//                this.player.body.velocity.y -= this.player.velocity;
-//            }
-//            else {
-//                this.player.body.velocity.y -= 0;
-//            }
-//            if (this.joystick.properties.down) {
-//                this.cursors.down.isDown = true;
-//                this.player.animations.play('walk');
-//                this.player.body.velocity.y += this.player.velocity;
-//            }
-//            else {
-//                this.player.body.velocity.y += 0;
-//            }
-//            if (this.joystick.properties.right) {
-//                this.cursors.right.isDown = true;
-//                this.player.body.velocity.x += this.player.velocity;
-//                this.player.animations.play('walk');
-//            }
-//            else {
-//                this.player.body.velocity.x += 0;
-//            }
-//            if (this.joystick.properties.left) {
-//                this.cursors.left.isDown = true;
-//                this.player.body.velocity.x -= this.player.velocity;
-//                this.player.animations.play('walk');
-//            } else {
-//                this.player.body.velocity.x -= 0;
-//            }
-//            if(!this.joystick.properties.inUse){
-//                if(!this.boolShooting){
-//                this.player.animations.stop();
-//                this.player.frame = 3;
-//                }
-//            }
-//        }
+        }
+        if (boolMoved) {
+            this.count++;
+            if (this.count % 2 == 0) {
+                // console.log(this.count);
+                socket.emit("moveMyPlayer", {
+                    id: this.player.id,
+                    x: this.player.x,
+                    y: this.player.y,
+                    map: Player.Map
+                });
+            }
+        }
     }
 };
