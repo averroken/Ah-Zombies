@@ -38,7 +38,7 @@ TopDownGame.room_1.prototype = {
         this.cursors = this.game.input.keyboard.createCursorKeys();
         console.log("My id: " + Player.Id);
 
-        socket.emit('getPlayers');
+        socket.emit('getPlayersAndEnemies', Player.Map);
 
         console.log(Player.Map);
 
@@ -61,7 +61,7 @@ TopDownGame.room_1.prototype = {
 
         this.createItems();
         this.createDoors();
-        this.addGamePad();
+//        this.addGamePad();
         this.addButtons();
     },
     enableJoysticks: function () {
@@ -223,7 +223,7 @@ TopDownGame.room_1.prototype = {
         this.game.physics.arcade.overlap(this.player, this.doors, this.enterDoor, null, this);
         this.player.body.velocity.y = 0;
         this.player.body.velocity.x = 0;
-        if (!this.joystick.enabled) {
+//        if (!this.joystick.enabled) {
             // console.log(this.count);
             var boolMoved = false;
 
@@ -268,56 +268,56 @@ TopDownGame.room_1.prototype = {
                     });
                 }
             }
-        } else {
-            console.log(this.joystick.properties.angle);
-            this.joystickangle = this.joystick.properties.rotation;
-            if (this.joystickangle != 0) {
-                this.player.rotation = this.joystick.properties.rotation;
-            }
-            if (this.button.isDown){
-                this.boolShooting = true;
-                this.player.frame = 0;
-                this.weapon.fire();
-            } else {
-                this.boolShooting = false;
-            }
-            if (this.joystick.properties.up) {
-                this.player.animations.play('walk');
-                this.cursors.up.isDown = true;
-                this.player.body.velocity.y -= this.player.velocity;
-            }
-            else {
-                this.player.body.velocity.y -= 0;
-            }
-            if (this.joystick.properties.down) {
-                this.cursors.down.isDown = true;
-                this.player.animations.play('walk');
-                this.player.body.velocity.y += this.player.velocity;
-            }
-            else {
-                this.player.body.velocity.y += 0;
-            }
-            if (this.joystick.properties.right) {
-                this.cursors.right.isDown = true;
-                this.player.body.velocity.x += this.player.velocity;
-                this.player.animations.play('walk');
-            }
-            else {
-                this.player.body.velocity.x += 0;
-            }
-            if (this.joystick.properties.left) {
-                this.cursors.left.isDown = true;
-                this.player.body.velocity.x -= this.player.velocity;
-                this.player.animations.play('walk');
-            } else {
-                this.player.body.velocity.x -= 0;
-            }
-            if(!this.joystick.properties.inUse){
-                if(!this.boolShooting){
-                this.player.animations.stop();
-                this.player.frame = 3;
-                }
-            }
-        }
+//        } else {
+//            console.log(this.joystick.properties.angle);
+//            this.joystickangle = this.joystick.properties.rotation;
+//            if (this.joystickangle != 0) {
+//                this.player.rotation = this.joystick.properties.rotation;
+//            }
+//            if (this.button.isDown){
+//                this.boolShooting = true;
+//                this.player.frame = 0;
+//                this.weapon.fire();
+//            } else {
+//                this.boolShooting = false;
+//            }
+//            if (this.joystick.properties.up) {
+//                this.player.animations.play('walk');
+//                this.cursors.up.isDown = true;
+//                this.player.body.velocity.y -= this.player.velocity;
+//            }
+//            else {
+//                this.player.body.velocity.y -= 0;
+//            }
+//            if (this.joystick.properties.down) {
+//                this.cursors.down.isDown = true;
+//                this.player.animations.play('walk');
+//                this.player.body.velocity.y += this.player.velocity;
+//            }
+//            else {
+//                this.player.body.velocity.y += 0;
+//            }
+//            if (this.joystick.properties.right) {
+//                this.cursors.right.isDown = true;
+//                this.player.body.velocity.x += this.player.velocity;
+//                this.player.animations.play('walk');
+//            }
+//            else {
+//                this.player.body.velocity.x += 0;
+//            }
+//            if (this.joystick.properties.left) {
+//                this.cursors.left.isDown = true;
+//                this.player.body.velocity.x -= this.player.velocity;
+//                this.player.animations.play('walk');
+//            } else {
+//                this.player.body.velocity.x -= 0;
+//            }
+//            if(!this.joystick.properties.inUse){
+//                if(!this.boolShooting){
+//                this.player.animations.stop();
+//                this.player.frame = 3;
+//                }
+//            }
+//        }
     }
 };

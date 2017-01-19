@@ -17,7 +17,7 @@ function isAuthenticated(req, res, next) {
     })
 }
 
-module.exports = function (app, io) {
+module.exports = function (app) {
     /*********SIGN IN*********/
     app.get('/signin', function (req, res) {
         var info = req.flash('error');
@@ -105,17 +105,17 @@ module.exports = function (app, io) {
     });
 
 
-    io.on('connection', function(socket) {
-        socket.on('chat message', function(message) {
-            time = new Date();
-            // console.log("------> chat message: " + message.message);
-            // console.log("------> chat user: " + message.user);
-            // console.log("------> chat time: " + time.getHours() + ":" + time.getMinutes());
-            io.emit('message', {
-                message: message.message,
-                user: message.user,
-                time: time.getHours() + ":" + time.getMinutes()
-            });
-        });
-    });
+//    io.on('connection', function(socket) {
+//        socket.on('chat message', function(message) {
+//            time = new Date();
+//            // console.log("------> chat message: " + message.message);
+//            // console.log("------> chat user: " + message.user);
+//            // console.log("------> chat time: " + time.getHours() + ":" + time.getMinutes());
+//            io.emit('message', {
+//                message: message.message,
+//                user: message.user,
+//                time: time.getHours() + ":" + time.getMinutes()
+//            });
+//        });
+//    });
 };

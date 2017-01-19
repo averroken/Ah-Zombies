@@ -1,3 +1,4 @@
+console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaah");
 var TopDownGame = TopDownGame ||  {};
 
 TopDownGame.game = new Phaser.Game(600, 300, Phaser.AUTO, 'game');
