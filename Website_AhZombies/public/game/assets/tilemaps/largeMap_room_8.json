@@ -70,7 +70,7 @@
                  "properties":
                     {
                      "offset":-60,
-                     "spawnPoint":"down",
+                     "spawnPoint":"up",
                      "type":"playerStart"
                     },
                  "propertytypes":
@@ -85,6 +85,140 @@
                  "width":32,
                  "x":322,
                  "y":603
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":29,
+                 "name":"ZombieSpawn5",
+                 "properties":
+                    {
+                     "offset":-50,
+                     "type":"zombieSpawn5"
+                    },
+                 "propertytypes":
+                    {
+                     "offset":"int",
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":270.827,
+                 "y":492.1885
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":30,
+                 "name":"ZombieSpawn4",
+                 "properties":
+                    {
+                     "offset":-50,
+                     "type":"zombieSpawn4"
+                    },
+                 "propertytypes":
+                    {
+                     "offset":"int",
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":356.246,
+                 "y":419.5675
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":31,
+                 "name":"ZombieSpawn3",
+                 "properties":
+                    {
+                     "offset":-50,
+                     "type":"zombieSpawn3"
+                    },
+                 "propertytypes":
+                    {
+                     "offset":"int",
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":275.267,
+                 "y":323.1885
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":32,
+                 "name":"ZombieSpawn2",
+                 "properties":
+                    {
+                     "offset":-50,
+                     "type":"zombieSpawn2"
+                    },
+                 "propertytypes":
+                    {
+                     "offset":"int",
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":285.328,
+                 "y":387.4325
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":33,
+                 "name":"ZombieSpawn1",
+                 "properties":
+                    {
+                     "offset":-50,
+                     "type":"zombieSpawn1"
+                    },
+                 "propertytypes":
+                    {
+                     "offset":"int",
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":363.173,
+                 "y":337.2055
+                }, 
+                {
+                 "gid":229,
+                 "height":32,
+                 "id":34,
+                 "name":"Ches",
+                 "properties":
+                    {
+                     "offset":-50,
+                     "sprite":"cute_lpc_chest",
+                     "type":"item"
+                    },
+                 "propertytypes":
+                    {
+                     "offset":"int",
+                     "sprite":"string",
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":334.026,
+                 "y":262.672
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -93,7 +227,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":29,
+ "nextobjectid":37,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,
@@ -101,7 +235,7 @@
         {
          "columns":3,
          "firstgid":1,
-         "image":"..\/..\/..\/..\/..\/..\/..\/Dropbox\/Howest\/Semester_5\/GameArt\/Tiled-test.png",
+         "image":"..\/..\/..\/..\/..\/..\/..\/..\/Downloads\/GameArt\/Tiled-test.png",
          "imageheight":32,
          "imagewidth":96,
          "margin":0,
@@ -114,7 +248,7 @@
         {
          "columns":16,
          "firstgid":4,
-         "image":"..\/..\/..\/..\/..\/..\/..\/Dropbox\/Howest\/Semester_5\/GameArt\/cute_lpc.png",
+         "image":"..\/..\/..\/..\/..\/..\/..\/..\/Downloads\/GameArt\/cute_lpc.png",
          "imageheight":512,
          "imagewidth":512,
          "margin":0,
@@ -141,7 +275,7 @@
         {
          "columns":2,
          "firstgid":260,
-         "image":"..\/..\/..\/..\/..\/..\/..\/Dropbox\/Howest\/Semester_5\/GameArt\/cute_lpc_doors_x.png",
+         "image":"..\/..\/..\/..\/..\/..\/..\/..\/Downloads\/GameArt\/cute_lpc_doors_x.png",
          "imageheight":77,
          "imagewidth":192,
          "margin":0,
@@ -154,7 +288,7 @@
         {
          "columns":2,
          "firstgid":262,
-         "image":"..\/..\/..\/..\/..\/..\/..\/Dropbox\/Howest\/Semester_5\/GameArt\/cute_lpc_doors_y.png",
+         "image":"..\/..\/..\/..\/..\/..\/..\/..\/Downloads\/GameArt\/cute_lpc_doors_y.png",
          "imageheight":96,
          "imagewidth":154,
          "margin":0,
@@ -163,19 +297,6 @@
          "tilecount":2,
          "tileheight":96,
          "tilewidth":77
-        }, 
-        {
-         "columns":16,
-         "firstgid":264,
-         "image":"..\/..\/..\/..\/..\/..\/..\/Dropbox\/Howest\/Semester_5\/GameArt\/cute_lpc.png",
-         "imageheight":512,
-         "imagewidth":512,
-         "margin":0,
-         "name":"cute_lpc",
-         "spacing":0,
-         "tilecount":256,
-         "tileheight":32,
-         "tilewidth":32
         }],
  "tilewidth":32,
  "version":1,

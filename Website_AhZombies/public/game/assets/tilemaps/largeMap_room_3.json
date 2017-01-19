@@ -159,7 +159,7 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":744,
+                 "x":840,
                  "y":482
                 }, 
                 {
@@ -183,8 +183,8 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":743.857058524176,
-                 "y":403.389199540877
+                 "x":555.857058524176,
+                 "y":469.389199540877
                 }, 
                 {
                  "gid":229,
@@ -207,8 +207,8 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":784.279139162673,
-                 "y":478.402929740483
+                 "x":642.279139162673,
+                 "y":473.402929740483
                 }, 
                 {
                  "gid":229,
@@ -231,8 +231,8 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":641.383126864997,
-                 "y":484.045212044489
+                 "x":730.383126864997,
+                 "y":475.045212044489
                 }, 
                 {
                  "gid":1,
@@ -305,6 +305,116 @@
                  "width":32,
                  "x":424.666666666667,
                  "y":487.333333333333
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":41,
+                 "name":"ZombieSpawn5",
+                 "properties":
+                    {
+                     "offset":-50,
+                     "type":"zombieSpawn5"
+                    },
+                 "propertytypes":
+                    {
+                     "offset":"int",
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":462.614235284459,
+                 "y":431.418110171579
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":42,
+                 "name":"ZombieSpawn4",
+                 "properties":
+                    {
+                     "offset":-50,
+                     "type":"zombieSpawn4"
+                    },
+                 "propertytypes":
+                    {
+                     "offset":"int",
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":479.033248501765,
+                 "y":516.796978901568
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":43,
+                 "name":"ZombieSpawn3",
+                 "properties":
+                    {
+                     "offset":-50,
+                     "type":"zombieSpawn3"
+                    },
+                 "propertytypes":
+                    {
+                     "offset":"int",
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":566.054018553485,
+                 "y":431.418110171579
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":44,
+                 "name":"ZombieSpawn2",
+                 "properties":
+                    {
+                     "offset":-50,
+                     "type":"zombieSpawn2"
+                    },
+                 "propertytypes":
+                    {
+                     "offset":"int",
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":584.114933092521,
+                 "y":503.661768327724
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":45,
+                 "name":"ZombieSpawn1",
+                 "properties":
+                    {
+                     "offset":-50,
+                     "type":"zombieSpawn1"
+                    },
+                 "propertytypes":
+                    {
+                     "offset":"int",
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":726.96034808308,
+                 "y":463.435185945325
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -313,7 +423,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":41,
+ "nextobjectid":66,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,
@@ -321,7 +431,7 @@
         {
          "columns":3,
          "firstgid":1,
-         "image":"..\/..\/..\/..\/..\/..\/..\/Dropbox\/Howest\/Semester_5\/GameArt\/Tiled-test.png",
+         "image":"..\/..\/..\/..\/..\/..\/..\/..\/Downloads\/GameArt\/Tiled-test.png",
          "imageheight":32,
          "imagewidth":96,
          "margin":0,
@@ -334,7 +444,7 @@
         {
          "columns":16,
          "firstgid":4,
-         "image":"..\/..\/..\/..\/..\/..\/..\/Dropbox\/Howest\/Semester_5\/GameArt\/cute_lpc.png",
+         "image":"..\/..\/..\/..\/..\/..\/..\/..\/Downloads\/GameArt\/cute_lpc.png",
          "imageheight":512,
          "imagewidth":512,
          "margin":0,
@@ -361,7 +471,7 @@
         {
          "columns":2,
          "firstgid":260,
-         "image":"..\/..\/..\/..\/..\/..\/..\/Dropbox\/Howest\/Semester_5\/GameArt\/cute_lpc_doors_x.png",
+         "image":"..\/..\/..\/..\/..\/..\/..\/..\/Downloads\/GameArt\/cute_lpc_doors_x.png",
          "imageheight":77,
          "imagewidth":192,
          "margin":0,
@@ -374,7 +484,7 @@
         {
          "columns":2,
          "firstgid":262,
-         "image":"..\/..\/..\/..\/..\/..\/..\/Dropbox\/Howest\/Semester_5\/GameArt\/cute_lpc_doors_y.png",
+         "image":"..\/..\/..\/..\/..\/..\/..\/..\/Downloads\/GameArt\/cute_lpc_doors_y.png",
          "imageheight":96,
          "imagewidth":154,
          "margin":0,
@@ -383,19 +493,6 @@
          "tilecount":2,
          "tileheight":96,
          "tilewidth":77
-        }, 
-        {
-         "columns":16,
-         "firstgid":264,
-         "image":"..\/..\/..\/..\/..\/..\/..\/Dropbox\/Howest\/Semester_5\/GameArt\/cute_lpc.png",
-         "imageheight":512,
-         "imagewidth":512,
-         "margin":0,
-         "name":"cute_lpc",
-         "spacing":0,
-         "tilecount":256,
-         "tileheight":32,
-         "tilewidth":32
         }],
  "tilewidth":32,
  "version":1,

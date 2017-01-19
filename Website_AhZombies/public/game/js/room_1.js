@@ -135,26 +135,29 @@ TopDownGame.room_1.prototype = {
             this.createFromTiledObject(element, this.doors);
         }, this);
     },
-    findSpawnPoint: function (type, map, layer, spawnPosition) {
-        var result = new Array();
-        if (result.length < 0) return;
-        map.objects[layer].forEach(function (element) {
-            var offset = 0;
-            if (element.properties.offset != undefined) {
-                offset = element.properties.offset;
-            }
-            if (element.properties.spawnPoint === spawnPosition) {
-                console.log("-------> spawn point found")
-            } else {
-                console.log("-------> spawn NOT point found --------------");
-                return;
-            }
-            if (element.properties.type === type) {
-                element.y -= map.tileHeight + 45 + offset;
-                result.push(element);
-            }
-        });
-        return result;
+    findSpawnPoint: function(type, map, layer, spawnPosition) {
+        console.log("-----------------MAP----------------");
+        console.log(map);
+        console.log("-----------------MAP----------------");
+    var result = new Array();
+    if (result.length < 0) return;
+    map.objects[layer].forEach(function(element) {
+        var offset = 0;
+        if (element.properties.offset != undefined){
+            offset = element.properties.offset;
+        }
+        if (element.properties.spawnPoint === spawnPosition){
+            console.log("-------> spawn point found")
+        }else {
+            console.log("-------> spawn NOT point found --------------");
+            return;
+        }
+        if (element.properties.type === type) {
+            element.y -= map.tileHeight + 45 + offset;
+            result.push(element);
+        }
+    });
+    return result;
     },
     findObjectsByType: function (type, map, layer) {
         var result = new Array();
@@ -196,11 +199,12 @@ TopDownGame.room_1.prototype = {
         });
         // socket.emit("updateItemList", items);
     },
-    enterDoor: function (player, door) {
-        let targetRoom = door.targetTileMap.split('|');
+    enterDoor: function(player, door) {
+      let targetRoom = door.targetTileMap.split('|');
         console.log('entering the door');
         console.log('targetTileMap: ' + targetRoom[0]);
         socket.emit('changeMap', targetRoom[0], Player.Id);
+        Player.Map=targetRoom[0];
         TopDownGame.game.state.start(targetRoom[0]);
         console.log('entering the door');
         console.log('targetTileMap: ' + targetRoom[0]);
