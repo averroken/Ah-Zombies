@@ -56,7 +56,7 @@ TopDownGame.room_1.prototype = {
 
         this.cursors = this.game.input.keyboard.createCursorKeys();
 
-        this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
+        this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
         //this.game.input.onDown.add(this.gofull, this);
 
         this.createItems();
@@ -232,20 +232,23 @@ TopDownGame.room_1.prototype = {
                 this.player.animations.play('walk');
                 this.player.body.velocity.y -= this.player.velocity;
                 boolMoved = true;
-            } else if (this.cursors.down.isDown) {
+            }
+            if (this.cursors.down.isDown) {
                 this.player.animations.play('walk');
                 this.player.body.velocity.y += this.player.velocity;
                 boolMoved = true;
             }
-            else if (this.cursors.left.isDown) {
+            if (this.cursors.left.isDown) {
                 this.player.animations.play('walk');
                 this.player.body.velocity.x -= this.player.velocity;
                 boolMoved = true;
-            } else if (this.cursors.right.isDown) {
+            }
+            if (this.cursors.right.isDown) {
                 this.player.animations.play('walk');
                 this.player.body.velocity.x += this.player.velocity;
                 boolMoved = true;
-            } else {
+            }
+            if(boolMoved==false) {
                 this.player.animations.stop();
                 this.player.frame = 3;
             }
