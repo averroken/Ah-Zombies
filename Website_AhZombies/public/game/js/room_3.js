@@ -8,4 +8,3 @@ TopDownGame.room_3.prototype = {
 };
 
 TopDownGame.room_3.prototype.__proto__ = TopDownGame.room_1.prototype;
-TopDownGame.room_3.prototype.create().__proto__ = TopDownGame.room_1.prototype.create();

@@ -5,7 +5,7 @@ block title
     title Ah!Zombies | Game
 
 block extraScripts
-    script(type='text/javascript', src='public/game/js/phaser.js')
+    script(type='text/javascript', src='public/game/js/min/phaser.js')
     script(type='text/javascript', src='public/game/js/phaser-plugin-virtual-gamepad.js')
     script(type='text/javascript', src='public/game/js/Boot.js')
     script(type='text/javascript', src='public/game/js/Preload.js')
@@ -74,7 +74,7 @@ block body
             a(href='') Contact
 
 block bottomScripts
-    script(type='text/javascript', src='public/game/js/min/main.js')
+    script(type='text/javascript', src='public/game/js/main.js')
     script(src='/socket.io/socket.io.js')
     script(type='text/javascript').
         var socket = io();
