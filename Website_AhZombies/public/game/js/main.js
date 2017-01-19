@@ -19,6 +19,7 @@ TopDownGame.game.state.add('room_5', TopDownGame.room_5);
 TopDownGame.game.state.add('room_6', TopDownGame.room_6);
 TopDownGame.game.state.add('room_7', TopDownGame.room_7);
 TopDownGame.game.state.add('room_8', TopDownGame.room_8);
+TopDownGame.game.state.add('victory', TopDownGame.Victory);
 
 
 TopDownGame.game.state.start('Boot');

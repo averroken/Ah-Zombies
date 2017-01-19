@@ -13,7 +13,7 @@ TopDownGame.Menu.prototype = {
         // the next menu item up).
         this.justExitedSubmenu = false;
 
-        background = this.add.tileSprite(0, 0, 800, 600, "background");
+        background = this.add.tileSprite(0, 0, 600, 300, "background");
 
         this.gameTitle = TopDownGame.game.add.image(TopDownGame.game.width / 2, TopDownGame.game.height / 2 - 120, 'menu_title');
         this.gameTitle.anchor.setTo(0.5, 0.5);

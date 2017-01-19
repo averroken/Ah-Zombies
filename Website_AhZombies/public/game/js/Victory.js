@@ -3,9 +3,9 @@
  */
 var TopDownGame = TopDownGame || {};
 
-TopDownGame.Menu2 = function () {};
+TopDownGame.Victory = function () {};
 
-TopDownGame.Menu2.prototype = {
+TopDownGame.Victory.prototype = {
     create: function () {
 
         // To exit the how-to or credits menu, I can press any button. This is to stop that same button press from
@@ -15,7 +15,7 @@ TopDownGame.Menu2.prototype = {
 
         background = this.add.tileSprite(0, 0, 600, 300, "background");
 
-        this.gameTitle = TopDownGame.game.add.image(TopDownGame.game.width / 2, TopDownGame.game.height / 2 - 120, 'retry_title');
+        this.gameTitle = TopDownGame.game.add.image(TopDownGame.game.width / 2, TopDownGame.game.height / 2 - 120, 'victory_title');
         this.gameTitle.anchor.setTo(0.5, 0.5);
 
         this.buttons = [];
@@ -27,8 +27,7 @@ TopDownGame.Menu2.prototype = {
             3: 160
         };
         this.buttonSettings = [
-            {key: 'retry_button', yOffset: -40, callback: this.levelSelect},
-            {key: 'how_to_button', yOffset: 60, callback: this.showHowTo}];
+            {key: 'how_to_button', yOffset: -40, callback: this.showHowTo}];
 
         this.buttonSettings.forEach(function(button) {
             this.buttons.push(this.addButton(button.key, button.yOffset, button.callback));
@@ -66,7 +65,7 @@ TopDownGame.Menu2.prototype = {
         else if(this.submenu == null) {
 
             this.arrow.animations.play('walk');
-            if(this.input.keyboard.isDown(Phaser.Keyboard.DOWN) && this.arrow.canMove && this.currentButton < 2) {
+            if(this.input.keyboard.isDown(Phaser.Keyboard.DOWN) && this.arrow.canMove && this.currentButton < 1) {
                 console.log(this.currentButton);
                 this.currentButton++;
                 this.setSelectedAnimation(this.buttons[this.currentButton - 1]);
