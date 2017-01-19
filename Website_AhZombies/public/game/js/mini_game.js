@@ -14,6 +14,7 @@ TopDownGame.mini_game = function() {};
 
 TopDownGame.mini_game.prototype = {
     create: function() {
+
         background = this.add.tileSprite(0, 0, 600, 300, "background");
 
         score = this.add.text(20,20,"Enemies killed: 0",
@@ -68,6 +69,7 @@ TopDownGame.mini_game.prototype = {
       this.health -= 1;
       this.healthBar.text = "Health: " + Math.round((this.health * 0.033333));
       if(this.health <= 0){
+          console.log("PLAYER DIED");
           this.alive = false;
           this.player.kill();
           enemiesKilled = 0;
@@ -127,8 +129,13 @@ TopDownGame.mini_game.prototype = {
 
     },
     update: function() {
+
+        //Collisions
         this.enemies.forEachAlive(this.moveEnemies,this);
         this.physics.arcade.collide(this.weapon.bullets,this.enemies,this.killEnemy,null,this);
+        this.physics.arcade.overlap(this.enemies, this.player, this.enemiesDamage,null,this);
+
+        //Wave handling
         if(this.enemies){
         this.aliveEnemies = this.enemies.countLiving();
         if(this.aliveEnemies <= 0){
@@ -136,7 +143,6 @@ TopDownGame.mini_game.prototype = {
             this.spawnEnemies();
         }
         }
-        this.physics.arcade.overlap(this.enemies, this.player, this.enemiesDamage,null,this);
 
         //Controls
         if (!this.joystick.enabled) {
@@ -198,6 +204,7 @@ TopDownGame.mini_game.prototype = {
             }
         }
     },
+    //Enable/disable joysticks function
     enableJoysticks: function () {
         this.joystick.enabled = (!this.joystick.enabled);
         this.joystick.visible = (!this.joystick.visible);
@@ -206,6 +213,7 @@ TopDownGame.mini_game.prototype = {
         // console.log(this.joystick);
         // console.log(this.gamepad);
     },
+    //Add joysticks to screen
     addGamePad: function () {
         // console.log("gamepad added");
         // Add the VirtualGamepad plugin to the game
@@ -221,6 +229,7 @@ TopDownGame.mini_game.prototype = {
 
         // console.log(this.joystick);
     },
+    //Add Fullscreen button and Enable/disable joysticks button
     addButtons: function () {
         this.buttons = this.game.add.group();
         this.fullScreenButton = this.add.button(this.game.width - 25, 5, 'fullScreenButton', this.gofull, this, 0, 0, 0, 0, this.buttons);
@@ -229,6 +238,7 @@ TopDownGame.mini_game.prototype = {
         this.joystickButton.fixedToCamera = true;
         this.game.world.bringToTop(this.buttons);
     },
+    //Go fullscreen function
     gofull: function () {
         if (this.scale.isFullScreen)
         {
@@ -239,6 +249,7 @@ TopDownGame.mini_game.prototype = {
             this.scale.startFullScreen(false);
         }
     },
+    //Kill enemy function
     killEnemy: function(bullet,enemy) {
         bullet.kill();
         enemy.animations.play('die',15,false,true);
@@ -251,6 +262,7 @@ TopDownGame.mini_game.prototype = {
             score.text = "Enemies killed: " +  enemiesKilled;
         });
     },
+    //Make enemies attack player
     moveEnemies: function(enemy){
         this.physics.arcade.moveToObject(enemy, this.player, 150);
         enemy.rotation = this.physics.arcade.angleBetween(enemy, this.player);

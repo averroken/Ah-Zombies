@@ -118,7 +118,7 @@
                  "properties":
                     {
                      "sprite":"cute_lpc_doors_y_left",
-                     "targetTileMap":"mini_game|mini_game",
+                     "targetTileMap":"Menu",
                      "type":"door"
                     },
                  "propertytypes":

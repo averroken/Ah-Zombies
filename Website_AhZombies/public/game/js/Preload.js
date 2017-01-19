@@ -43,7 +43,7 @@ TopDownGame.Preload.prototype = {
         //MiniGame
         this.load.spritesheet('enemy', 'public/game/assets/zombie_topdown.png',128,128);
         this.load.image('bullet','public/game/assets/bullet.png');
-        this.load.image('background', 'public/game/assets/background.jpg');
+        this.load.image('background', 'public/game/assets/background.png');
 
         this.load.image('menu_title', 'public/game/assets/menu/title.png');
         this.load.image('retry_title', 'public/game/assets/menu/retry_title.png');

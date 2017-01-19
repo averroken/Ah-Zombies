@@ -113,6 +113,7 @@ TopDownGame.Victory.prototype = {
     },
     addButton: function (key, yOffset, callback) {
         var button = TopDownGame.game.add.image(TopDownGame.game.camera.width / 2, TopDownGame.game.camera.height / 2 + yOffset, key);
+        button.events.onInputDown.add(callback, this);
         button.anchor.setTo(.5, .5);
         button.scale.x = .5;
         button.scale.y = .5;
@@ -124,7 +125,6 @@ TopDownGame.Victory.prototype = {
             this.scaleTween.stop(true);
             this.scaleTween.onKill.dispatch();
         }
-
         TopDownGame.game.tweens.removeAll();
 
         this.scaleTween = TopDownGame.game.add.tween(button.scale).to({x: .65, y: .65}, 500, Phaser.Easing.Quadratic.InOut).yoyo(true).repeat(Number.MAX_VALUE).start();
